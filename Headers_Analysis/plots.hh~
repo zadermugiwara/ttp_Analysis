@@ -1,0 +1,190 @@
+// ----------------------------------------------------------------------------------------------------------------------------------
+// -------------------- Hadron-level plots --------------------
+//
+//                                          /***************\
+// ----------------------------------------- 3Analysis_ttbar --------- //
+//                                          \***************/
+
+
+// ===== ROOT file ===== //
+TFile ROOTfile(rootfile, "RECREATE");               // Name passed from main analysis
+
+
+
+// +++++ ROOT Tree +++++ //
+//TTree* ROOTdist = new TTree("Dists", "epem_ttbar"); // Easy to deal with trees
+
+/*double BbquarkE = -999.0, BbquarkX = -999.0, BbquarkY = -999.0, BbquarkZ = -999.0;
+
+ROOTdist->Branch("bquarkE",  &BbquarkE,  "BbquarkE/D");
+ROOTdist->Branch("bquarkX",  &BbquarkX,  "BbquarkX/D");
+ROOTdist->Branch("bquarkY",  &BbquarkY,  "BbquarkY/D");
+ROOTdist->Branch("bquarkZ",  &BbquarkZ,  "BbquarkZ/D");
+*/
+
+
+// +++++ Histograms +++++ //
+
+int jetbins_a     = 15;
+float max_njets_a = 14.5;
+int jetbins_b     = 10;
+float max_njets_b = 9.5;
+float max_pt      = 1800.0;
+float min_rap     = -4.0;
+float max_rap     = 4.0;
+float max_e       = 1800.0;
+float max_m       = 1000.0;
+int goodlep_bins  = 5;
+float goodlep_max = 4.5;
+float rec_max     = 3000.0;
+
+
+
+// --- Cut-flow ---
+// Bin 0 : All events
+TH1F* HCutflow = new TH1F("HCutflow", "Cutflow", 10, -0.5, 9.5);
+HCutflow -> SetXTitle("Cut number");
+HCutflow -> SetYTitle("Events");
+
+
+
+// --- Number of good leptons ---
+TH1F* HN_glep = new TH1F("HN_glep", "Number of good leptons", goodlep_bins, -0.5, goodlep_max);
+HN_glep -> SetXTitle("Number of good leptons");
+HN_glep -> SetYTitle("Number of events");
+
+
+
+// --- Jet multiplicity ---
+TH1F* HNJets_a = new TH1F("HNJets_a", "Number of jets R = 0.5", jetbins_a, -0.5, max_njets_a);
+HNJets_a -> SetXTitle("Jet multiplicity");
+HNJets_a -> SetYTitle("Events");
+
+TH1F* HNJets_b = new TH1F("HNJets_b", "Number of jets R = 1.2", jetbins_b, -0.5, max_njets_b);
+HNJets_b -> SetXTitle("Jet multiplicity");
+HNJets_b -> SetYTitle("Events");
+
+
+
+// --- DeltaR(lsj, lfj) ---
+TH1F* HDR_lj = new TH1F("HDR_lj", "#Delta R(lsj, lfj)", 110, -0.5, 10.5);
+HDR_lj -> SetXTitle("#Delta R");
+HDR_lj -> SetYTitle("Events");
+
+
+
+// --- Leading fatjets' info ---
+TH1F* Hfj_pt = new TH1F("Hfj_pt", "Leading fatjet's p_{T}", (int)max_pt, 0.0, max_pt);
+Hfj_pt -> SetXTitle("p_{T}");
+Hfj_pt -> SetYTitle("Counts");
+
+TH1F* Hfj_rap = new TH1F("Hfj_rap", "Leading fatjet's rapidity", 80, min_rap, max_rap);
+Hfj_rap -> SetXTitle("Y");
+Hfj_rap -> SetYTitle("Counts");
+
+TH1F* Hfj_E = new TH1F("Hfj_E", "Leading fatjet's energy", (int)max_e, 0.0, max_e);
+Hfj_E -> SetXTitle("Energy");
+Hfj_E -> SetYTitle("Counts");
+
+TH1F* Hfj_m = new TH1F("Hfj_m", "Leading fatjet's invariant mass", (int)max_m, 0.0, max_m);
+Hfj_m -> SetXTitle("Mass");
+Hfj_m -> SetYTitle("Counts");
+
+
+
+// --- Recoil mass ---
+TH1F* Hrec_mass = new TH1F("Hrec_mass", "Recoil mass", (int)rec_max, 0.0, rec_max);
+Hrec_mass -> SetXTitle("Recoil mass");
+Hrec_mass -> SetYTitle("Counts");
+
+
+
+// --- Fatjet's scatter plots ---
+TH2F* SPm_pT = new TH2F("SPm_pT", "m_{fatjet} vs. pT_{fatjet}", (int)max_m, 0.0, max_m, (int)max_pt, 0.0, max_pt);
+SPm_pT -> SetXTitle("m_{fatjet}");
+SPm_pT -> SetYTitle("pT_{fatjet}");
+
+TH2F* SPm_E = new TH2F("SPm_E", "m_{fatjet} vs. E_{fatjet}", (int)max_m, 0.0, max_m, (int)max_e, 0.0, max_e);
+SPm_E -> SetXTitle("m_{fatjet}");
+SPm_E -> SetYTitle("E_{fatjet}");
+
+TH2F* SPpT_E = new TH2F("SPpT_E", "pT_{fatjet} vs. E_{fatjet}", (int)max_pt, 0.0, max_pt, (int)max_e, 0.0, max_e);
+SPpT_E -> SetXTitle("pT_{fatjet}");
+SPpT_E -> SetYTitle("E_{fatjet}");
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+
+TH2F* SPm_rec = new TH2F("SPm_rec", "m_{fatjet} vs. m_{rec}", (int)max_m, 0.0, max_m, (int)rec_max, 0.0, rec_max);
+SPm_rec -> SetXTitle("m_{fatjet}");
+SPm_rec -> SetYTitle("m_{rec}");
+
+TH2F* SPpT_rec = new TH2F("SPpT_rec", "pT_{fatjet} vs. m_{rec}", (int)max_pt, 0.0, max_pt, (int)rec_max, 0.0, rec_max);
+SPpT_rec -> SetXTitle("pT_{fatjet}");
+SPpT_rec -> SetYTitle("m_{rec}");
+
+TH2F* SPe_rec = new TH2F("SPe_rec", "E_{fatjet} vs. m_{rec}", (int)max_e, 0.0, max_e, (int)rec_max, 0.0, rec_max);
+SPe_rec -> SetXTitle("E_{fatjet}");
+SPe_rec -> SetYTitle("m_{rec}");
+
+
+/*
+// --- Sign of rapidity product and dot product ---
+
+TH1F* Hprod_signs = new TH1F("Hprod_signs", "Rapidity product sign-comparisson with dot product", 3, -0.5, 2.5);
+Hprod_signs -> SetXTitle("0:no & 1:yes");
+Hprod_signs -> SetYTitle("Counts");
+*/
+
+
+// --- Number of fatjets in leading fatjet's hemisphere ---
+
+TH1F* HN_FJ_LFJ = new TH1F("HN_FJ_LFJ", "Number of fatjets in leading fatjet's hemisphere", 5, -0.5, 4.5);
+HN_FJ_LFJ -> SetXTitle("Number of fatjets");
+HN_FJ_LFJ -> SetYTitle("Counts");
+
+
+
+// --- Number of fatjets vs. Number of fatjets in leading fatjet's hemisphere ---
+
+TH2F* SP_NFJ = new TH2F("SP_NFJ", "Number of fatjets vs. Number of fatjets in leading fatjet's hemisphere", jetbins_b, -0.5, max_njets_b, jetbins_b, -0.5, max_njets_b);
+SP_NFJ -> SetXTitle("Number of fatjets");
+SP_NFJ -> SetYTitle("Number of fatjets in leading fatjet's hemisphere");
+
+
+
+// --- Recoil mass 2 ---
+TH1F* Hljh_mass_a = new TH1F("Hljh_mass_a", "Leading jet's hemisphere mass", (int)max_m, 0.0, max_m);
+Hljh_mass_a -> SetXTitle("m");
+Hljh_mass_a -> SetYTitle("Counts");
+
+TH1F* Hrec_mass2_a = new TH1F("Hrec_mass2_a", "Recoil mass 2", (int)rec_max, 0.0, rec_max);
+Hrec_mass2_a -> SetXTitle("m");
+Hrec_mass2_a -> SetYTitle("Counts");
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+
+TH1F* Hljh_mass_aa = new TH1F("Hljh_mass_aa", "Leading jet's hemisphere mass", (int)max_m, 0.0, max_m);
+Hljh_mass_aa -> SetXTitle("m");
+Hljh_mass_aa -> SetYTitle("Counts");
+
+TH1F* Hrec_mass2_aa = new TH1F("Hrec_mass2_aa", "Recoil mass 2", (int)rec_max, 0.0, rec_max);
+Hrec_mass2_aa -> SetXTitle("m");
+Hrec_mass2_aa -> SetYTitle("Counts");
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+
+TH1F* Hljh_mass_b = new TH1F("Hljh_mass_b", "Leading jet's hemisphere mass", (int)max_m, 0.0, max_m);
+Hljh_mass_b -> SetXTitle("m");
+Hljh_mass_b -> SetYTitle("Counts");
+
+TH1F* Hrec_mass2_b = new TH1F("Hrec_mass2_b", "Recoil mass 2", (int)rec_max, 0.0, rec_max);
+Hrec_mass2_b -> SetXTitle("m");
+Hrec_mass2_b -> SetYTitle("Counts");
+
+
+
+// --- Number of resolved events ---
+TH1F* HN_resolved = new TH1F("HN_resolved", "Number of resolved events", 2, -0.5, 1.5);
+HN_resolved -> SetYTitle("Number of events");
+
+
