@@ -1,0 +1,127 @@
+#include <iostream>
+using namespace std;
+
+void plots() {
+
+  double L = 5000.0, N = 100000.0;
+  int REBIN = 5;
+  
+  using namespace std;
+  gROOT->SetStyle("Plain");
+  gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
+
+
+  // ********************************************* //
+  // ***** Import histograms from root files ***** //
+  // ********************************************* //
+  
+  // ------------------------------------------------------------------------------------------------
+  // === Open root file === //
+  TFile* output_sig_tree = new TFile("output_sig_tree.root");
+  TFile* output_bg1_tree = new TFile("output_bg1_tree.root");
+  TFile* output_bg2_tree = new TFile("output_bg2_tree.root");
+  TFile* output_bg3_tree = new TFile("output_bg3_tree.root");
+  TFile* output_bg6_tree = new TFile("output_bg6_tree.root");
+  TFile* output_bg7_tree = new TFile("output_bg7_tree.root");
+  TFile* output_bg8_tree = new TFile("output_bg8_tree.root");
+
+  
+  // ---  Create new histograms and read histograms form root file
+
+  TH1F* Hm_sig_c;
+  output_sig_tree -> GetObject("H_m", Hm_sig_c);     // Signal
+
+
+  TH1F* Hm_bg1_c;
+  output_bg1_tree -> GetObject("H_m", Hm_bg1_c);   // Background 1: H ve ve~
+
+
+  TH1F* Hm_bg2_c;
+  output_bg2_tree -> GetObject("H_m", Hm_bg2_c);   // Background 2: W+ W-
+
+
+  TH1F* Hm_bg3_c;
+  output_bg3_tree -> GetObject("H_m", Hm_bg3_c);   // Background 3: W+ W- ve ve~
+
+
+  TH1F* Hm_bg6_c;
+  output_bg6_tree -> GetObject("H_m", Hm_bg6_c);   // Background 6: W+ W- Z (z > mall mall)
+
+
+  TH1F* Hm_bg7_c;
+  output_bg7_tree -> GetObject("H_m", Hm_bg7_c);   // Background 7: Z Z
+
+
+  TH1F* Hm_bg8_c;
+  output_bg8_tree -> GetObject("H_m", Hm_bg8_c);   // Background 8 H Z (z > mall mall)
+
+
+
+
+   auto hs = new THStack("hs","");
+   
+   Hm_sig_c -> Scale( 19.14 * L / N );
+   Hm_sig_c -> Rebin(REBIN);
+   Hm_sig_c -> SetFillColor(kRed);
+   Hm_sig_c -> SetLineColor(kRed);
+   hs       -> Add(Hm_sig_c);
+
+   Hm_bg1_c -> Scale( 497.2 * L / N );
+   Hm_bg1_c -> Rebin(REBIN);
+   Hm_bg1_c -> SetFillColor(kBlue);
+   Hm_bg1_c -> SetLineColor(kBlue);
+   hs       -> Add(Hm_bg1_c);
+
+   Hm_bg2_c -> Scale( 466.2 * L / N );
+   Hm_bg2_c -> Rebin(REBIN);
+   Hm_bg2_c -> SetFillColor(kGreen);
+   Hm_bg2_c -> SetLineColor(kGreen);
+   hs       -> Add(Hm_bg2_c);
+
+   Hm_bg3_c -> Scale( 126.8 * L / N );
+   Hm_bg3_c -> Rebin(REBIN);
+   Hm_bg3_c -> SetFillColor(kOrange+4);
+   Hm_bg3_c -> SetLineColor(kOrange+4);
+   hs       -> Add(Hm_bg3_c);
+
+   Hm_bg6_c -> Scale( 30.64 * L / N );
+   Hm_bg6_c -> Rebin(REBIN);
+   Hm_bg6_c -> SetFillColor(kPink+10);
+   Hm_bg6_c -> SetLineColor(kPink+10);
+   hs       -> Add(Hm_bg6_c);
+
+   Hm_bg7_c -> Scale( 26.08 * L / N );
+   Hm_bg7_c -> Rebin(REBIN);
+   Hm_bg7_c -> SetFillColor(kBlack);
+   Hm_bg7_c -> SetLineColor(kBlack);
+   hs       -> Add(Hm_bg7_c);
+
+   Hm_bg8_c -> Scale( 1.28 * L / N );
+   Hm_bg8_c -> Rebin(REBIN);
+   Hm_bg8_c -> SetFillColor(kYellow);
+   Hm_bg8_c -> SetLineColor(kYellow);
+   hs       -> Add(Hm_bg8_c);
+   
+   auto cs = new TCanvas("cs","cs",10,10,700,900);
+   TText T; T.SetTextFont(42); T.SetTextAlign(21);
+   cs -> cd(); hs -> Draw("HIST"); T.DrawTextNDC(.5,.95,"LFJ's mass stacked histograms (Mcut = 130)");
+
+   TLegend* leg15 = new TLegend(0.55, 0.45, 0.75, 0.75);
+   leg15 -> SetBorderSize(0);
+   leg15 -> SetFillColor(0);
+   leg15 -> SetTextFont(42);
+   leg15 -> SetTextSize(0.035);
+   leg15 -> AddEntry(Hm_sig_c, "sig: t t~","f");
+   leg15 -> AddEntry(Hm_bg1_c, "bg1: H ve ve~","f");
+   leg15 -> AddEntry(Hm_bg2_c, "bg2: W+ W-","f");
+   leg15 -> AddEntry(Hm_bg3_c, "bg3: W+ W- ve ve~","f");
+   leg15 -> AddEntry(Hm_bg6_c, "bg6: W+ W- Z (Z>mall)","f");
+   leg15 -> AddEntry(Hm_bg7_c, "bg7: Z Z","f");
+   leg15 -> AddEntry(Hm_bg8_c, "bg8: H Z (Z>mall)","f");
+   leg15 -> Draw("SAME");
+
+
+  
+}

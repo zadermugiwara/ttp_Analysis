@@ -1,0 +1,273 @@
+// Colors
+// 0: white, 1: black, 2: red, 3: green, 4: blue, 5: yellow, 6:pink, 7: cyan, 8: lime, 9: purple
+
+
+#include <iostream>
+using namespace std;
+
+void plots() {
+
+  using namespace std;
+  gROOT->SetStyle("Plain");
+  gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptFit(0);
+  vector<int> lin_sty = {1, 1, 1, 1};
+  //vector<int> lin_col = {2, 3, 4, 1, 5, 6, 7, 8, 9};
+  //vector<string> lin_col = {"kRed", "kBlue", "kGreen", "kOrange+4", "kPink+10", "kBlack", "kYellow"};
+  int REBIN = 5;
+  double line_width = 1.5;
+
+  // ******************************* //
+  // ***** Define the canvases ***** //
+  // ******************************* //
+  // TCanvas (name, title, pixel coordinates of top left corner of canvas, window size in pixels)
+
+  // --- Leading fatjet's mass --- //
+  // TCanvas* c14 = new TCanvas("c14", "LFJ's mass", 0, 0, 800, 600);
+  TCanvas* c15 = new TCanvas("c15", "LFJ recoil mass (Mcut = 130)", 0, 0, 800, 600);
+
+
+  // ********************************************* //
+  // ***** Import histograms from root files ***** //
+  // ********************************************* //
+  
+  // ----------------------------------------------------------------------------
+  // === Open root file === //
+  TFile* output_sig_tree = new TFile("output_sig_tree.root");
+  TFile* output_bg1_tree = new TFile("output_bg1_tree.root");
+  TFile* output_bg2_tree = new TFile("output_bg2_tree.root");
+  TFile* output_bg3_tree = new TFile("output_bg3_tree.root");
+  TFile* output_bg6_tree = new TFile("output_bg6_tree.root");
+  TFile* output_bg7_tree = new TFile("output_bg7_tree.root");
+  TFile* output_bg8_tree = new TFile("output_bg8_tree.root");
+
+  
+  // ---  Create new histograms and read histograms form root file
+
+  /*TH1F* Hm_sig;
+    ttbar_SM_3000 -> GetObject("Hfj_m_precut", Hm_sig);*/
+  TH1F* Hrec_sig;
+  output_sig_tree -> GetObject("H_rec", Hrec_sig);  // Signal
+
+  /*TH1F* Hm_bg1;
+    bg1_3000 -> GetObject("Hfj_m_precut", Hm_bg1);*/
+  TH1F* Hrec_bg1;
+  output_bg1_tree -> GetObject("H_rec", Hrec_bg1);   // Background 1: H ve ve~
+
+  /*TH1F* Hm_bg2;
+    bg2_3000 -> GetObject("Hfj_m_precut", Hm_bg2);*/
+  TH1F* Hrec_bg2;
+  output_bg2_tree -> GetObject("H_rec", Hrec_bg2);   // Background 2: W+ W-
+
+  /*TH1F* Hm_bg3;
+    bg3_3000 -> GetObject("Hfj_m_precut", Hm_bg3);*/
+  TH1F* Hrec_bg3;
+  output_bg3_tree -> GetObject("H_rec", Hrec_bg3);   // Background 3: W+ W- ve ve~
+
+  
+  /*TH1F* Hm_bg6;
+    bg6_3000 -> GetObject("Hfj_m_precut", Hm_bg6);*/
+  TH1F* Hrec_bg6;
+  output_bg6_tree -> GetObject("H_rec", Hrec_bg6);   // Background 6: W+ W- Z (z > mall mall)
+
+  /*TH1F* Hm_bg7;
+    bg7_3000 -> GetObject("Hfj_m_precut", Hm_bg7);*/
+  TH1F* Hrec_bg7;
+  output_bg7_tree -> GetObject("H_rec", Hrec_bg7);   // Background 7: Z Z
+
+  /*TH1F* Hm_bg8;
+    bg8_3000 -> GetObject("Hfj_m_precut", Hm_bg8);*/
+  TH1F* Hrec_bg8;
+  output_bg8_tree -> GetObject("H_rec", Hrec_bg8);   // Background 8 H Z (z > mall mall)
+  
+  
+  /* 
+  // ***************************** //
+  // ***** Fourteenth canvas ***** //
+  // ***************************** //
+
+  // === General configuration === //
+  c14 -> cd();
+  Hm_sig -> GetXaxis() -> SetTitle("LFJ's mass [GeV]");
+  Hm_sig -> GetXaxis() -> SetTitleOffset(1.2);
+  Hm_sig -> GetXaxis() -> SetTitleFont(42);
+  Hm_sig -> GetXaxis() -> SetLabelFont(42);
+  Hm_sig -> GetYaxis() -> SetTitle("Arbitrary units / 2 GeV");
+  Hm_sig -> GetYaxis() -> SetTitleOffset(1.4);
+  Hm_sig -> GetYaxis() -> SetTitleFont(42);
+  Hm_sig -> GetYaxis() -> SetLabelFont(42);
+
+  // --- Draw the first histogram on the canvas --- //
+  Hm_sig -> SetLineColor(lin_col[0]);
+  Hm_sig -> SetLineWidth(line_width);
+  Hm_sig -> SetLineStyle(lin_sty[0]);
+  Hm_sig -> Rebin(REBIN);
+  Hm_sig -> Scale( 1.0 / Hm_sig -> Integral() );
+  Hm_sig -> GetXaxis() -> SetRangeUser(0.0, 300.0);
+  Hm_sig -> GetYaxis() -> SetRangeUser(0.0, 0.3);
+  Hm_sig -> Draw("HIST");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg1 -> SetLineColor(lin_col[1]);
+  Hm_bg1 -> SetLineWidth(line_width);
+  Hm_bg1 -> SetLineStyle(lin_sty[0]);
+  Hm_bg1 -> Rebin(REBIN);
+  Hm_bg1 -> Scale( 1.0 / Hm_bg1 -> Integral() );
+  Hm_bg1 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg2 -> SetLineColor(lin_col[2]);
+  Hm_bg2 -> SetLineWidth(line_width);
+  Hm_bg2 -> SetLineStyle(lin_sty[0]);
+  Hm_bg2 -> Rebin(REBIN);
+  Hm_bg2 -> Scale( 1.0 / Hm_bg2 -> Integral() );
+  Hm_bg2 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg3 -> SetLineColor(lin_col[3]);
+  Hm_bg3 -> SetLineWidth(line_width);
+  Hm_bg3 -> SetLineStyle(lin_sty[0]);
+  Hm_bg3 -> Rebin(REBIN);
+  Hm_bg3 -> Scale( 1.0 / Hm_bg3 -> Integral() );
+  Hm_bg3 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg6 -> SetLineColor(lin_col[4]);
+  Hm_bg6 -> SetLineWidth(line_width);
+  Hm_bg6 -> SetLineStyle(lin_sty[0]);
+  Hm_bg6 -> Rebin(REBIN);
+  Hm_bg6 -> Scale( 1.0 / Hm_bg6 -> Integral() );
+  Hm_bg6 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg7 -> SetLineColor(lin_col[5]);
+  Hm_bg7 -> SetLineWidth(line_width);
+  Hm_bg7 -> SetLineStyle(lin_sty[0]);
+  Hm_bg7 -> Rebin(REBIN);
+  Hm_bg7 -> Scale( 1.0 / Hm_bg7 -> Integral() );
+  Hm_bg7 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hm_bg8 -> SetLineColor(lin_col[6]);
+  Hm_bg8 -> SetLineWidth(line_width);
+  Hm_bg8 -> SetLineStyle(lin_sty[0]);
+  Hm_bg8 -> Rebin(REBIN);
+  Hm_bg8 -> Scale( 1.0 / Hm_bg8 -> Integral() );
+  Hm_bg8 -> Draw("HIST SAME");
+
+
+  // --- Legend for each histogram on the canvas --- //
+  // TLegend(x1, y1, x2, y2)
+  TLegend* leg14 = new TLegend(0.55, 0.45, 0.75, 0.75);
+  leg14 -> SetBorderSize(0);
+  leg14 -> SetFillColor(0);
+  leg14 -> SetTextFont(42);
+  leg14 -> SetTextSize(0.035);
+  leg14 -> AddEntry(Hm_sig, "sig: t t~","f");
+  leg14 -> AddEntry(Hm_bg1, "bg1: H ve ve~","f");
+  leg14 -> AddEntry(Hm_bg2, "bg2: W+ W-","f");
+  leg14 -> AddEntry(Hm_bg3, "bg3: W+ W- ve ve~","f");
+  leg14 -> AddEntry(Hm_bg6, "bg6: W+ W- Z (Z>mall)","f");
+  leg14 -> AddEntry(Hm_bg7, "bg7: Z Z","f");
+  leg14 -> AddEntry(Hm_bg8, "bg8: H Z (Z>mall)","f");
+  leg14 -> Draw("SAME");
+  // ______________________________________________________________________________________
+  // ______________________________________________________________________________________
+
+  */
+
+  // **************************** //
+  // ***** Fifteenth canvas ***** //
+  // **************************** //
+
+  // === General configuration === //
+  c15 -> cd();
+  Hrec_sig -> GetXaxis() -> SetTitle("LFJ recoil mass [GeV]");
+  Hrec_sig -> GetXaxis() -> SetTitleOffset(1.2);
+  Hrec_sig -> GetXaxis() -> SetTitleFont(42);
+  Hrec_sig -> GetXaxis() -> SetLabelFont(42);
+  Hrec_sig -> GetYaxis() -> SetTitle("Arbitrary units / 10 GeV");
+  Hrec_sig -> GetYaxis() -> SetTitleOffset(1.4);
+  Hrec_sig -> GetYaxis() -> SetTitleFont(42);
+  Hrec_sig -> GetYaxis() -> SetLabelFont(42);
+
+  // --- Draw the first histogram on the canvas --- //
+  Hrec_sig -> SetLineColor(kRed);
+  Hrec_sig -> SetLineWidth(line_width);
+  Hrec_sig -> SetLineStyle(lin_sty[0]);
+  Hrec_sig -> Rebin(REBIN);
+  Hrec_sig -> Scale( 1.0 / Hrec_sig -> Integral() );
+  Hrec_sig -> GetXaxis() -> SetRangeUser(0.0, 3000.0);
+  Hrec_sig -> GetYaxis() -> SetRangeUser(0.0, 0.5);
+  Hrec_sig -> Draw("HIST");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg1 -> SetLineColor(kBlue);
+  Hrec_bg1 -> SetLineWidth(line_width);
+  Hrec_bg1 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg1 -> Rebin(REBIN);
+  Hrec_bg1 -> Scale( 1.0 / Hrec_bg1 -> Integral() );
+  Hrec_bg1 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg2 -> SetLineColor(kGreen);
+  Hrec_bg2 -> SetLineWidth(line_width);
+  Hrec_bg2 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg2 -> Rebin(REBIN);
+  Hrec_bg2 -> Scale( 1.0 / Hrec_bg2 -> Integral() );
+  Hrec_bg2 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg3 -> SetLineColor(kOrange+4);
+  Hrec_bg3 -> SetLineWidth(line_width);
+  Hrec_bg3 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg3 -> Rebin(REBIN);
+  Hrec_bg3 -> Scale( 1.0 / Hrec_bg3 -> Integral() );
+  Hrec_bg3 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg6 -> SetLineColor(kPink+10);
+  Hrec_bg6 -> SetLineWidth(line_width);
+  Hrec_bg6 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg6 -> Rebin(REBIN);
+  Hrec_bg6 -> Scale( 1.0 / Hrec_bg6 -> Integral() );
+  Hrec_bg6 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg7 -> SetLineColor(kBlack);
+  Hrec_bg7 -> SetLineWidth(line_width);
+  Hrec_bg7 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg7 -> Rebin(REBIN);
+  Hrec_bg7 -> Scale( 1.0 / Hrec_bg7 -> Integral() );
+  Hrec_bg7 -> Draw("HIST SAME");
+
+  // --- Draw another histogram on the canvas --- //
+  Hrec_bg8 -> SetLineColor(kYellow);
+  Hrec_bg8 -> SetLineWidth(line_width);
+  Hrec_bg8 -> SetLineStyle(lin_sty[0]);
+  Hrec_bg8 -> Rebin(REBIN);
+  Hrec_bg8 -> Scale( 1.0 / Hrec_bg8 -> Integral() );
+  Hrec_bg8 -> Draw("HIST SAME");
+
+
+  // --- Legend for each histogram on the canvas --- //
+  // TLegend(x1, y1, x2, y2)
+  TLegend* leg15 = new TLegend(0.55, 0.45, 0.75, 0.75);
+  leg15 -> SetBorderSize(0);
+  leg15 -> SetFillColor(0);
+  leg15 -> SetTextFont(42);
+  leg15 -> SetTextSize(0.035);
+  leg15 -> AddEntry(Hrec_sig, "sig: t t~","f");
+  leg15 -> AddEntry(Hrec_bg1, "bg1: H ve ve~","f");
+  leg15 -> AddEntry(Hrec_bg2, "bg2: W+ W-","f");
+  leg15 -> AddEntry(Hrec_bg3, "bg3: W+ W- ve ve~","f");
+  leg15 -> AddEntry(Hrec_bg6, "bg6: W+ W- Z (Z>mall)","f");
+  leg15 -> AddEntry(Hrec_bg7, "bg7: Z Z","f");
+  leg15 -> AddEntry(Hrec_bg8, "bg8: H Z (Z>mall)","f");
+  leg15 -> Draw("SAME");
+  // ______________________________________________________________________________________
+  // ______________________________________________________________________________________
+
+  
+}
