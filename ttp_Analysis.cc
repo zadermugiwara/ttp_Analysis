@@ -259,16 +259,14 @@ double Ptotal = 0;
 	      // --- FS charged leptons ---
 	      	      
 	      if( IsElectron(*p) || IsMuon(*p) )
-		{ 
-		  leptons.push_back(momentum);
-		  pvisible += momentum;
-		  continue;
-		}
+		    { 
+		      leptons.push_back(momentum);
+		      pvisible += momentum;
+		      continue;
+		    }
 		
 	      //=================Ht (Modificación Higinio)===================
-	     if(momentum.user_index() != 22){
-	          Ptotal += momentum.pt();
-	      }
+	      if(momentum.user_index() != 22)  Ptotal += momentum.pt();
 	      //==============================================================
 	      
 	      // --- Hadrons and photons ---
@@ -296,8 +294,8 @@ double Ptotal = 0;
 	  for(unsigned i = 0; i < leptons.size(); i++)
 	    if( fabs(leptons[i].eta()) > etamax_leptons )
 	      {
-		leptons.erase( leptons.begin() + i );
-		i--;
+		      leptons.erase( leptons.begin() + i );
+		      i--;
 	      }
 	  
 	  
@@ -306,7 +304,6 @@ double Ptotal = 0;
 
 	  //if( leptons.size() > 1 )  vetoEvent;
 	  
-	  //cf[1] += 1;                           // =============================================================== Cutflow 1 ============
 	  
 	  
 	  // -------------------------- //
@@ -340,10 +337,10 @@ double Ptotal = 0;
 	      jets.clear();
 
 	      if(i == 0)
-		jets = sorted_by_pt( clust_seq_a.inclusive_jets(pTmin_jets[0]) );     // === Small R jets
+		      jets = sorted_by_pt( clust_seq_a.inclusive_jets(pTmin_jets[0]) );     // === Small R jets
 		
 	      if(i == 1)
-		jets = sorted_by_pt( clust_seq_b.inclusive_jets(pTmin_jets[1]) );     // === Fatjets
+		      jets = sorted_by_pt( clust_seq_b.inclusive_jets(pTmin_jets[1]) );     // === Fatjets
 
 	      Njets[i] = (int)jets.size();
 	      jets_matrix.push_back(jets);
