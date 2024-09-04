@@ -43,7 +43,7 @@ Tdist -> Branch( "rec",        &T_rec,        "T_rec/D"        );
 
 TH1F* deltaRjet = new TH1F("deltaRjet","",1000,-0,10);
 TH1F* deltaRlepton = new TH1F("deltaRlepton","",1000,0,10);
-TH1F* m_recoil = new TH1F("m_recoil","",1000,0,5000);
+TH1F* m_recoil = new TH1F("m_recoil","",5000,0,5000);
 TH1F* m_fatjet = new TH1F("mass","",1000,0,1200);
 TH1F* m_fatjetpost = new TH1F("mass_post","",1000,0,1200);
 TH1F* m_fatjetlead = new TH1F("mass_lead","",1000,0,1200);
@@ -56,21 +56,21 @@ TH1F* fatjetleadHthem = new TH1F("fatjetleadHthem","",1000,0,5000);
 TH1F* fatjet2Hthem = new TH1F("fatjet2Hthem","",1000,0,5000);
 
 TH1F* m_fatjetpost2 = new TH1F("mass_post2","",1000,0,1200);
-TH1F* m_recoil2 = new TH1F("m_recoil2","",1000,0,5000);
+TH1F* m_recoil2 = new TH1F("m_recoil2","",5000,0,5000);
 TH1F* fatjetpostHt2 = new TH1F("fatjetpostHt2","",50,0,1);
 
 TH1F* pt_fatjetpost = new TH1F("pt_fatjetpost","",1000,0,5000);
 TH1F* pt_fatjetpost2 = new TH1F("pt_fatjetpost2","",1000,0,5000);
 
 TH1F* goodFJ = new TH1F("goodFJ","",3,0,3);
-TH1F* m_recoil05 = new TH1F("m_recoil0.5","",1000,0,5000);
-TH1F* m_recoil0 = new TH1F("m_recoil0","",1000,0,5000);
+TH1F* m_recoil05 = new TH1F("m_recoil0.5","",5000,0,5000);
+TH1F* m_recoil0 = new TH1F("m_recoil0","",5000,0,5000);
 
 TH2F* EFJvsmrecoil = new TH2F("EFJvsmrecoil","",3000,0,3000,3000,0,3000);
 TH2F* m_FJvspt_FJ = new TH2F("m_FJvspt_FJ","",3000,0,3000,3000,0,3000);
 
 TH1F* m_toplikes = new TH1F("masstoplike","",1000,0,1200);
-TH1F* m_recoiltoplikes = new TH1F("mrecoil toplikes","",3000,0,3000);
+TH1F* m_recoiltoplikes = new TH1F("mrecoil toplikes","",5000,0,5000);
 
 TH1F* No_FJ = new TH1F("No_FJ","",5,0,5);
 TH1F* No_top_FJ = new TH1F("No_top_FJ","",5,0,5);
@@ -80,6 +80,64 @@ TH2F* EFJvspt = new TH2F("EFJvspt","",3000,0,3000,3000,0,3000);
 TH2F* massvspt = new TH2F("massvspt","",3000,0,3000,3000,0,3000);
 
 TH1F* mrecoil_top_E_cut = new TH1F("mrecoil_top_E_cut","",3000,0,3000);
+
+TH2F* mrecoilvspt = new TH2F("mrecoilvspt","",3000,0,3000,3000,0,3000);
+
+TH2F* EvsHt = new TH2F("EvsHt","",3000,0,3000,100,0,2);
+TH2F* ptvsHt = new TH2F("ptvsHt","",3000,0,3000,100,0,2);
+TH2F* mrecoilvsHt = new TH2F("mrecoilvsHt","",3000,0,3000,100,0,2);
+
+TH2F* ptfatvsHt = new TH2F("ptfatvsHt","",3000,0,3000,3000,0,3000);
+
+
+TH1F* m_recoilcut = new TH1F("m_recoilcut","",1000,0,5000);
+TH1F* topHt = new TH1F("topHt","",100,0,2);
+
+TH1F* m_recoil_isolated_toplikes = new TH1F("m_recoil_isolated_toplikes","",5000,0,5000);
+
+TH1F* TPmass = new TH1F("TPmass","",5000,0,5000);
+TH1F* topmass = new TH1F("topmass","",5000,0,5000);
+TH1F* topdecmass = new TH1F("topdecmass","",5000,0,5000);
+TH1F* truth_recoil = new TH1F("truth_recoil","",5000,0,5000);
+
+TH1F* truth_deltaR_jet_TP = new TH1F("truth_deltaR_jet_TP","",1000,-0,10);
+TH1F* truth_deltaR_jet_top = new TH1F("truth_deltaR_jet_top","",1000,-0,10);
+TH1F* truth_deltaR_jet_topdec = new TH1F("truth_deltaR_jet_topdec","",1000,-0,10);
+
+TH1F* truth_deltaR_leptons_TP = new TH1F("truth_deltaR_leptons_TP","",1000,-0,10);
+TH1F* truth_deltaR_leptons_top = new TH1F("truth_deltaR_leptons_top","",1000,-0,10);
+TH1F* truth_deltaR_leptons_topdec = new TH1F("truth_deltaR_leptons_topdec","",1000,-0,10);
+
+TH1F* truth_deltaR_fatjet_TP = new TH1F("truth_deltaR_fatjet_TP","",1000,-0,10);
+TH1F* truth_deltaR_fatjet_top = new TH1F("truth_deltaR_fatjet_top","",1000,-0,10);
+TH1F* truth_deltaR_fatjet_topdec = new TH1F("truth_deltaR_fatjet_topdec","",1000,-0,10);
+
+TH2F* truth_deltaR_fatjet_top_vs_deltaR_fatjet_topdec = new TH2F("truth_deltaR_fatjet_top_vs_deltaR_fatjet_topdec","",1000,0,10,1000,0,10);
+
+
+TH1F* cheat_good_deltaRjet = new TH1F("good_deltaRjet","",1000,-0,10);
+TH1F* cheat_good_deltaRlepton = new TH1F("good_deltaRlepton","",1000,0,10);
+TH1F* cheat_good_m_recoil = new TH1F("good_m_recoil","",5000,0,5000);
+TH1F* cheat_good_m_fatjet = new TH1F("good_m_fatjet","",1000,0,1200);
+TH1F* cheat_good_pt_fatjet = new TH1F("good_pt_fatjet","",3000,0,3000);
+TH1F* cheat_good_E_fatjet = new TH1F("good_E_fatjet","",3000,0,3000);
+TH1F* cheat_good_Ht_fatjet = new TH1F("good_Ht_fatjet","",100,0,2);
+
+
+
+TH1F* cheat_bad_deltaRjet = new TH1F("bad_deltaRjet","",1000,-0,10);
+TH1F* cheat_bad_deltaRlepton = new TH1F("bad_deltaRlepton","",1000,0,10);
+TH1F* cheat_bad_m_recoil = new TH1F("bad_m_recoil","",5000,0,5000);
+TH1F* cheat_bad_m_fatjet = new TH1F("bad_m_fatjet","",1000,0,1200);
+TH1F* cheat_bad_pt_fatjet = new TH1F("bad_pt_fatjet","",3000,0,3000);
+TH1F* cheat_bad_E_fatjet = new TH1F("bad_E_fatjet","",3000,0,3000);
+TH1F* cheat_bad_Ht_fatjet = new TH1F("bad_Ht_fatjet","",100,0,2);
+
+
+
+
+
+
 
 
 

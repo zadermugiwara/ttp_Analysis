@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
   int    pt_cut       = 400 ;
   int    Energy_cut   = 1200 ;
   
-  string CF[6] = {"All    ", "Mass > " + to_string(mass_cut), "Pt > " + to_string(pt_cut), "Isolated", "top tagged", "Energy " + to_string(Energy_cut)};    // === Cutflow labels ===
+  string CF[6] = {"All    ", "Mass > " + to_string(mass_cut), "Pt > " + to_string(pt_cut), "top tagged", "Isolated", "Energy " + to_string(Energy_cut)};    // === Cutflow labels ===
 
 
   
@@ -135,6 +135,10 @@ int main(int argc, char* argv[])
   
   vector<PseudoJet> jets;                         // === For the Pseudojets of every jet with fixed radius ===
   vector<vector<PseudoJet>> jets_matrix;          // === For the Pseudojets of every jet ===
+
+  PseudoJet TP(0.0, 0.0, 0.0, 0.0);
+  PseudoJet top(0.0, 0.0, 0.0, 0.0);
+  PseudoJet topdec(0.0, 0.0, 0.0, 0.0);
 
   
   // ***** Classes for HepMC objects ***
@@ -219,18 +223,68 @@ int main(int argc, char* argv[])
 	  
 	  hadrons.clear();
 	  leptons.clear();
+    TP.reset(0.0, 0.0, 0.0, 0.0);
+    top.reset(0.0, 0.0, 0.0, 0.0);
+    topdec.reset(0.0, 0.0, 0.0, 0.0);
 	  momentum.reset(0.0, 0.0, 0.0, 0.0);
 	  pvisible.reset(0.0, 0.0, 0.0, 0.0);
 
 //=================Higidios=================
-double Ptotal = 0;
+//double Ptotal = 0;
 //==================================
 	  
 	  // ***** Loop over all particles in the event *****
 	  
 	  for(GenEvent::particle_const_iterator p = evt -> particles_begin(); p != evt -> particles_end(); ++p)
 	    {
-	      if( !IsFinalState(*p) ) continue;        // === Look into FS objects only
+	      
+        
+        if((*p)->status() == 22){
+          
+          if(abs((*p) -> pdg_id())==6000006){
+            TP.reset( (*p) -> momentum().px(),
+			      (*p) -> momentum().py(),
+			      (*p) -> momentum().pz(),
+			      (*p) -> momentum().e() );
+            continue;
+          }
+          if(abs((*p) -> pdg_id())==6){
+            GenVertex::particle_iterator mother = (*p)->production_vertex()->particles_begin(HepMC::parents);
+            if(abs((*mother) -> pdg_id())==11){
+              top.reset( (*p) -> momentum().px(),
+			        (*p) -> momentum().py(),
+			        (*p) -> momentum().pz(),
+			        (*p) -> momentum().e() );
+              
+              
+              continue;
+            }
+            if(abs((*mother) -> pdg_id())==6000006){
+              topdec.reset( (*p) -> momentum().px(),
+			        (*p) -> momentum().py(),
+			        (*p) -> momentum().pz(),
+			        (*p) -> momentum().e() );
+              continue;
+            } 
+            continue;
+          } 
+          continue;
+        }
+        /*if(abs((*p) -> pdg_id())==6){
+          cout     <<             (*p) ->status()      << endl;
+          if ( (*p)->production_vertex() ) {
+		    for ( GenVertex::particle_iterator mother = (*p)->production_vertex()->particles_begin(HepMC::parents);
+            mother != (*p)->production_vertex()->
+			      particles_end(HepMC::parents); 
+			      ++mother ) {
+			    cout << "\t "<<(*mother)->pdg_id() << endl;
+			    
+		    }
+        } 
+        }*/
+        
+        
+        if( !IsFinalState(*p) ) continue;        // === Look into FS objects only
 	      
 	      
 	      // --- Read particle's momentum and pdgid ---
@@ -266,7 +320,8 @@ double Ptotal = 0;
 		    }
 		
 	      //=================Ht (Modificación Higinio)===================
-	      if(momentum.user_index() != 22)  Ptotal += momentum.pt();
+	      //if(momentum.user_index() != 22)  
+        //Ptotal += momentum.pt();
 	      //==============================================================
 	      
 	      // --- Hadrons and photons ---
@@ -440,6 +495,24 @@ double Ptotal = 0;
                         
                         //===============================================================
               //=======================================================================================================================
+       
+        TPmass->Fill(TP.m());
+        topmass->Fill(top.m());
+        if (topdec.m() != 0){
+          topdecmass->Fill(topdec.m());
+        }
+        truth_recoil->Fill(sqrt( pow(3000, 2) - (2 * 3000 * top.E()) + top.m2() ));
+        
+        
+
+        double Ptotal = 0;
+
+        for(int i=0; i<Njets[0]; i++){
+          Ptotal += jets_matrix[0][i].perp();
+        }
+
+
+
         m_fatjetlead->Fill(jets_matrix[1][0].m());
         Ht->Fill(Ptotal);
         int ngoodFJ = 0;
@@ -457,15 +530,18 @@ double Ptotal = 0;
           }
                 
 
-	        if(jets_matrix[1][i].m() < mass_cut) continue;  //mass cut
-	        if(cont1 ==0) cf[1]++;                // =============================================================== Cutflow 2 ================================================================================
-	        cont1++;                
+	        //if(jets_matrix[1][i].m() < mass_cut) continue;  //mass cut
+	        //if(cont1 ==0) cf[1]++;                // =============================================================== Cutflow 2 ================================================================================
+	        //cont1++;                
 	        
 	        
-	        if(jets_matrix[1][i].perp()<pt_cut) continue; //pt cut
-	        if(cont2 ==0) cf[2]++;               // =============================================================== Cutflow 3 =================================================================================
-	        cont2++;
+	        //if(jets_matrix[1][i].perp()<pt_cut) continue; //pt cut
+	        //if(cont2 ==0) cf[2]++;               // =============================================================== Cutflow 3 =================================================================================
+	        //cont2++;
           
+          if(tagged == 0) continue;
+	        if(cont3 ==0) cf[3]++;      // =============================================================== Cutflow 5 =========================================================================
+	        cont3++;
           
           int nnearjets=0, nnearleptons=0;
 
@@ -473,21 +549,44 @@ double Ptotal = 0;
           for(int j=0; j<Njets[0]; j++){
             if(jets_matrix[0][j].perp()>25){    
               float deltaR = DeltaR(jets_matrix[1][i],jets_matrix[0][j]);
+              float deltaRtop = DeltaR(jets_matrix[1][i],top);
               deltaRjet->Fill(deltaR);
+              truth_deltaR_jet_TP->Fill(DeltaR(jets_matrix[0][j],TP));
+              truth_deltaR_jet_top->Fill(DeltaR(jets_matrix[0][j],top));
+              truth_deltaR_jet_topdec->Fill(DeltaR(jets_matrix[0][j],topdec));
               if(deltaR>1.7 && deltaR<2.5) nnearjets++;
+              if(deltaRtop<1.2){
+                cheat_good_deltaRjet->Fill(deltaR);
+              }else{
+                cheat_bad_deltaRjet->Fill(deltaR);
+              }
             }
           }
           for(int j=0; j<leptons.size(); j++){
             if(leptons[j].perp()>25){
               float deltaR = DeltaR(jets_matrix[1][i],leptons[j]);
+              float deltaRtop = DeltaR(jets_matrix[1][i],top);
               deltaRlepton->Fill(deltaR);
+              truth_deltaR_leptons_TP->Fill(DeltaR(leptons[j],TP));
+              truth_deltaR_leptons_top->Fill(DeltaR(leptons[j],top));
+              truth_deltaR_leptons_topdec->Fill(DeltaR(leptons[j],topdec));
               if(deltaR<2.5) nnearleptons++;
+              if(deltaRtop<1.2){
+                cheat_good_deltaRlepton->Fill(deltaR);
+              }else{
+                cheat_bad_deltaRlepton->Fill(deltaR);
+              }
             }
           }
-            
-          if(nnearleptons != 0 || nnearjets != 0) continue;// top tagger cut
-          if(cont3 ==0) cf[3]++;       // =============================================================== Cutflow 4 ==================================================================================
-          cont3++;
+
+          
+          double Ht = jets_matrix[1][i].perp()/Ptotal;
+
+          if(Ht > 0.4){ 
+            if(nnearleptons != 0 || nnearjets != 0) continue;// top tagger cut
+          }
+          if(cont4 == 0) cf[4]++;       // =============================================================== Cutflow 4 ==================================================================================
+          cont4++;
                                             
           
           T_LFJ_E      = jets_matrix[1][i].E();
@@ -497,24 +596,56 @@ double Ptotal = 0;
 	        //T_evt_weight = EvtWeight;
 	        T_rec        = sqrt( pow(3000, 2) - (2 * 3000 * jets_matrix[1][i].E()) + jets_matrix[1][i].m2() );
 	               
-                 
-          if(tagged == 0) continue;
-	        if(cont4 ==0) cf[4]++;      // =============================================================== Cutflow 5 =========================================================================
-	        cont4++;         
+          truth_deltaR_fatjet_TP->Fill(DeltaR(jets_matrix[1][i],TP));
+          truth_deltaR_fatjet_top->Fill(DeltaR(jets_matrix[1][i],top));
+          if(topdec.m() != 0){
+            truth_deltaR_fatjet_topdec->Fill(DeltaR(jets_matrix[1][i],topdec));
+            truth_deltaR_fatjet_top_vs_deltaR_fatjet_topdec->Fill(DeltaR(jets_matrix[1][i],top),DeltaR(jets_matrix[1][i],topdec));
+          }         
 
 
 	        EFJvsmass->Fill(jets_matrix[1][i].E(),jets_matrix[1][i].m());  
 	        EFJvspt->Fill(jets_matrix[1][i].E(),jets_matrix[1][i].perp());
 	        massvspt->Fill(jets_matrix[1][i].m(),jets_matrix[1][i].perp());
-                        
+          ptfatvsHt->Fill(jets_matrix[1][i].perp(),Ptotal);
+          topHt->Fill(jets_matrix[1][i].perp()/Ptotal);
+          m_recoil_isolated_toplikes->Fill(T_rec);
+
+          if(DeltaR(jets_matrix[1][i],top)<1.2){
+            cheat_good_m_recoil->Fill(T_rec);
+            cheat_good_m_fatjet->Fill(jets_matrix[1][i].m());
+            cheat_good_pt_fatjet->Fill(jets_matrix[1][i].perp());
+            cheat_good_E_fatjet->Fill(jets_matrix[1][i].E());
+            cheat_good_Ht_fatjet->Fill(Ht);
+
+          }else{
+            cheat_bad_m_recoil->Fill(T_rec);
+            cheat_bad_m_fatjet->Fill(jets_matrix[1][i].m());
+            cheat_bad_pt_fatjet->Fill(jets_matrix[1][i].perp());
+            cheat_bad_E_fatjet->Fill(jets_matrix[1][i].E());
+            cheat_bad_Ht_fatjet->Fill(Ht);
+          }
           if(ngoodFJ == 0){
-            if(jets_matrix[1][i].perp()/Ptotal>0.5){
+            if(Ht > 0.41){
               m_recoil05->Fill(T_rec);
+              //if(jets_matrix[1][i].perp() < 400) continue;
             }else{
               m_recoil0->Fill(T_rec);
+              //makeif(jets_matrix[1][i].perp() > 900) continue;
             }
+            if(((jets_matrix[1][i].E()/(Ht-1200))<200)&&(jets_matrix[1][i].E()<1300)){
+              m_recoilcut->Fill(T_rec);
+
+            }
+            //if((jets_matrix[1][i].E() > 900)&&(Ht > 0.5))
+            //m_recoil->Fill(T_rec);
+            //if((jets_matrix[1][i].E() < 1300)&&(Ht < 0.65))
             m_recoil->Fill(T_rec);
+            mrecoilvspt->Fill(T_rec,jets_matrix[1][i].perp());
             EFJvsmrecoil->Fill(jets_matrix[1][i].E(),T_rec);
+            EvsHt->Fill(jets_matrix[1][i].E(),Ht);
+            ptvsHt->Fill(jets_matrix[1][i].perp(),Ht);
+            mrecoilvsHt->Fill(T_rec,Ht);
             m_fatjetpost->Fill(jets_matrix[1][i].m());
             fatjetpostHt->Fill(jets_matrix[1][i].perp()/Ptotal);
             pt_fatjetpost->Fill(jets_matrix[1][i].perp());
@@ -631,7 +762,7 @@ double Ptotal = 0;
 // ···································································································· //
 // ···································································································· //
 // ···································································································· //
-ostream & operator<<(ostream & ostr, const PseudoJet & jet) {
+ostream & operator<<(ostream & ostr, const PseudoJet & jet){
    ostr << "pt, y, phi =" << setprecision(6)
         << " " << setw(9) << jet.perp() 
         << " " << setw(9)  <<  jet.rap()  
