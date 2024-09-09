@@ -2,7 +2,8 @@
     "files.associations": {
         "new": "cpp",
         "*.icc": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "Histograms.C": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

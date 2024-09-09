@@ -553,8 +553,9 @@ int main(int argc, char* argv[])
               deltaRjet->Fill(deltaR);
               truth_deltaR_jet_TP->Fill(DeltaR(jets_matrix[0][j],TP));
               truth_deltaR_jet_top->Fill(DeltaR(jets_matrix[0][j],top));
-              truth_deltaR_jet_topdec->Fill(DeltaR(jets_matrix[0][j],topdec));
               if(deltaR>1.7 && deltaR<2.5) nnearjets++;
+              if(topdec.m() == 0) continue;
+              truth_deltaR_jet_topdec->Fill(DeltaR(jets_matrix[0][j],topdec));
               if(deltaRtop<1.2){
                 cheat_good_deltaRjet->Fill(deltaR);
               }else{
@@ -571,6 +572,8 @@ int main(int argc, char* argv[])
               truth_deltaR_leptons_top->Fill(DeltaR(leptons[j],top));
               truth_deltaR_leptons_topdec->Fill(DeltaR(leptons[j],topdec));
               if(deltaR<2.5) nnearleptons++;
+              if(topdec.m() == 0) continue;
+              truth_deltaR_leptons_topdec->Fill(DeltaR(leptons[j],topdec));
               if(deltaRtop<1.2){
                 cheat_good_deltaRlepton->Fill(deltaR);
               }else{
@@ -611,19 +614,20 @@ int main(int argc, char* argv[])
           topHt->Fill(jets_matrix[1][i].perp()/Ptotal);
           m_recoil_isolated_toplikes->Fill(T_rec);
 
-          if(DeltaR(jets_matrix[1][i],top)<1.2){
-            cheat_good_m_recoil->Fill(T_rec);
-            cheat_good_m_fatjet->Fill(jets_matrix[1][i].m());
-            cheat_good_pt_fatjet->Fill(jets_matrix[1][i].perp());
-            cheat_good_E_fatjet->Fill(jets_matrix[1][i].E());
-            cheat_good_Ht_fatjet->Fill(Ht);
-
-          }else{
-            cheat_bad_m_recoil->Fill(T_rec);
-            cheat_bad_m_fatjet->Fill(jets_matrix[1][i].m());
-            cheat_bad_pt_fatjet->Fill(jets_matrix[1][i].perp());
-            cheat_bad_E_fatjet->Fill(jets_matrix[1][i].E());
-            cheat_bad_Ht_fatjet->Fill(Ht);
+          if(topdec.m() != 0){
+            if(DeltaR(jets_matrix[1][i],top)<1.2){
+              cheat_good_m_recoil->Fill(T_rec);
+              cheat_good_m_fatjet->Fill(jets_matrix[1][i].m());
+              cheat_good_pt_fatjet->Fill(jets_matrix[1][i].perp());
+              cheat_good_E_fatjet->Fill(jets_matrix[1][i].E());
+              cheat_good_Ht_fatjet->Fill(Ht);
+            }else{
+              cheat_bad_m_recoil->Fill(T_rec);
+              cheat_bad_m_fatjet->Fill(jets_matrix[1][i].m());
+              cheat_bad_pt_fatjet->Fill(jets_matrix[1][i].perp());
+              cheat_bad_E_fatjet->Fill(jets_matrix[1][i].E());
+              cheat_bad_Ht_fatjet->Fill(Ht);
+            }
           }
           if(ngoodFJ == 0){
             if(Ht > 0.41){
