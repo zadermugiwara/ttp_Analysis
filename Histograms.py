@@ -58,74 +58,55 @@ with TFile.Open("root/"+name+"1200.root", "read") as f1200:
         
 
                     c1.cd()
+
+                    mass1200.Scale(1.0/mass1200.Integral())
+                    mass1200.SetLineColor(1)
+                    
+                    mass1600.Scale(1.0/mass1600.Integral())
+                    mass1600.SetLineColor(2)
+                    
+                    mass2000.Scale(1.0/mass2000.Integral())
+                    mass2000.SetLineColor(3)
+                    
+                    mass2400.Scale(1.0/mass2400.Integral())
+                    mass2400.SetLineColor(4)
+
                     num = mayor(mass1200.GetMaximum(), mass1600.GetMaximum(), mass2000.GetMaximum(), mass2400.GetMaximum())
 
                     if(num == 1):
-                        mass1200.Scale(1.0/mass1200.Integral())
-                        mass1200.SetLineColor(1)
                         mass1200.Draw("HIST")
-
-                        mass1600.Scale(1.0/mass1600.Integral())
-                        mass1600.SetLineColor(2)
+                        
                         mass1600.Draw("HIST SAME")
-
-                        mass2000.Scale(1.0/mass2000.Integral())
-                        mass2000.SetLineColor(3)
+                        
                         mass2000.Draw("HIST SAME")
-
-                        mass2400.Scale(1.0/mass2400.Integral())
-                        mass2400.SetLineColor(4)
+                        
                         mass2400.Draw("HIST SAME")
 
                     elif(num == 2):
-                        mass1600.Scale(1.0/mass1600.Integral())
-                        mass1600.SetLineColor(2)
                         mass1600.Draw("HIST")
 
-                        mass1200.Scale(1.0/mass1200.Integral())
-                        mass1200.SetLineColor(1)
                         mass1200.Draw("HIST SAME")
 
-                        mass2000.Scale(1.0/mass2000.Integral())
-                        mass2000.SetLineColor(3)
                         mass2000.Draw("HIST SAME")
 
-                        mass2400.Scale(1.0/mass2400.Integral())
-                        mass2400.SetLineColor(4)
                         mass2400.Draw("HIST SAME")
 
                     elif(num == 3):
-                        mass2000.Scale(1.0/mass2000.Integral())
-                        mass2000.SetLineColor(3)
                         mass2000.Draw("HIST")
 
-                        mass1600.Scale(1.0/mass1600.Integral())
-                        mass1600.SetLineColor(2)
                         mass1600.Draw("HIST SAME")
 
-                        mass1200.Scale(1.0/mass1200.Integral())
-                        mass1200.SetLineColor(1)
                         mass1200.Draw("HIST SAME")
 
-                        mass2400.Scale(1.0/mass2400.Integral())
-                        mass2400.SetLineColor(4)
                         mass2400.Draw("HIST SAME")
 
                     elif(num == 4):
-                        mass2400.Scale(1.0/mass2400.Integral())
-                        mass2400.SetLineColor(4)
                         mass2400.Draw("HIST")
                         
-                        mass1600.Scale(1.0/mass1600.Integral())
-                        mass1600.SetLineColor(2)
                         mass1600.Draw("HIST SAME")
 
-                        mass1200.Scale(1.0/mass1200.Integral())
-                        mass1200.SetLineColor(1)
                         mass1200.Draw("HIST SAME")
 
-                        mass2000.Scale(1.0/mass2000.Integral())
-                        mass2000.SetLineColor(3)
                         mass2000.Draw("HIST SAME")
 
                         
