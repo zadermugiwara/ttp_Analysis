@@ -45,11 +45,10 @@ Finished working on file: /media/higinio/ASE/Analysis_ttbar (para Higinio)/Tt100
 	    Cut       # of evts
       ----------------------------
 	0 All    	100000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	22865
-	4 Isolated	15255
-	5 Energy 1200	9510
+	1 Fatjet 	99972
+	2 top tagged	22865
+	3 Isolated	15255
+	4 Energy 1200	9510
       ----------------------------
 Cross section [pb]: 24.632
 
@@ -90,11 +89,10 @@ Finished working on file: /media/higinio/ASE/Analysis_ttbar (para Higinio)/Tt100
 	    Cut       # of evts
       ----------------------------
 	0 All    	100000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	22459
-	4 Isolated	16472
-	5 Energy 1200	15099
+	1 Fatjet 	99975
+	2 top tagged	22459
+	3 Isolated	16472
+	4 Energy 1200	15099
       ----------------------------
 Cross section [pb]: 18.849
 
@@ -135,11 +133,10 @@ Finished working on file: /media/higinio/ASE/Analysis_ttbar (para Higinio)/Tt100
 	    Cut       # of evts
       ----------------------------
 	0 All    	100000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	20426
-	4 Isolated	16226
-	5 Energy 1200	14353
+	1 Fatjet 	99974
+	2 top tagged	20426
+	3 Isolated	16226
+	4 Energy 1200	14353
       ----------------------------
 Cross section [pb]: 12.059
 
@@ -180,11 +177,10 @@ Finished working on file: /media/higinio/ASE/Analysis_ttbar (para Higinio)/Tt100
 	    Cut       # of evts
       ----------------------------
 	0 All    	100000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	16574
-	4 Isolated	12727
-	5 Energy 1200	10565
+	1 Fatjet 	99950
+	2 top tagged	16574
+	3 Isolated	12727
+	4 Energy 1200	10565
       ----------------------------
 Cross section [pb]: 5.3353
 

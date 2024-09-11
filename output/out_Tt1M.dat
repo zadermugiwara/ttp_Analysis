@@ -45,11 +45,10 @@ Finished working on file: /media/higinio/ASE/hepmcs/Tt1M1200.hepmc
 	    Cut       # of evts
       ----------------------------
 	0 All    	1000000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	229013
-	4 Isolated	152055
-	5 Energy 1200	95644
+	1 Fatjet 	999728
+	2 top tagged	240419
+	3 Isolated	157215
+	4 Energy 1200	97293
       ----------------------------
 Cross section [pb]: 246.46
 
@@ -90,11 +89,10 @@ Finished working on file: /media/higinio/ASE/hepmcs/Tt1M1600.hepmc
 	    Cut       # of evts
       ----------------------------
 	0 All    	1000000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	223049
-	4 Isolated	164909
-	5 Energy 1200	151128
+	1 Fatjet 	999778
+	2 top tagged	230032
+	3 Isolated	169290
+	4 Energy 1200	153451
       ----------------------------
 Cross section [pb]: 188.64
 
@@ -135,11 +133,10 @@ Finished working on file: /media/higinio/ASE/hepmcs/Tt1M2000.hepmc
 	    Cut       # of evts
       ----------------------------
 	0 All    	1000000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	205298
-	4 Isolated	162314
-	5 Energy 1200	144143
+	1 Fatjet 	999698
+	2 top tagged	211975
+	3 Isolated	166762
+	4 Energy 1200	145497
       ----------------------------
 Cross section [pb]: 120.84
 
@@ -180,11 +177,10 @@ Finished working on file: /media/higinio/ASE/hepmcs/Tt1M2400.hepmc
 	    Cut       # of evts
       ----------------------------
 	0 All    	1000000
-	1 Mass > 140	0
-	2 Pt > 400	0
-	3 top tagged	166426
-	4 Isolated	127797
-	5 Energy 1200	105775
+	1 Fatjet 	999512
+	2 top tagged	175404
+	3 Isolated	132151
+	4 Energy 1200	106465
       ----------------------------
 Cross section [pb]: 53.32
 
