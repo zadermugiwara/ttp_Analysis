@@ -112,14 +112,14 @@ int main(int argc, char* argv[])
   double EvtWeight    = 0.0;                      // === Keeps track of per-event weight ===
   int    total_events = 0;                        // === All events analysed in list_all_files ===
   int    icount       = 0;                        // === Event counter per HepMC file ===
-  int    cf[6]        = {0, 0, 0, 0, 0, 0};       // === Cutflow counter ===
+  int    cf[5]        = {0, 0, 0, 0, 0};       // === Cutflow counter === 
   
   // ***** cuts
   int    mass_cut     = 140 ;  
   int    pt_cut       = 400 ;
   int    Energy_cut   = 1200 ;
   
-  string CF[6] = {"All    ", "Mass > " + to_string(mass_cut), "Pt > " + to_string(pt_cut), "top tagged", "Isolated", "Energy " + to_string(Energy_cut)};    // === Cutflow labels ===
+  string CF[5] = {"All    ", "Fatjet ","top tagged", "Isolated", "Energy " + to_string(Energy_cut)};    // === Cutflow labels ===
 
 
   
@@ -416,7 +416,7 @@ int main(int argc, char* argv[])
 	  if( Njets[1] >= 1 ) {
 	  
 	    
-	      //cf[1] += 1;                       // =============================================================== Cutflow 2 ============
+	      cf[1]++;                       // =============================================================== Cutflow 2 ============
 
 	      
 	      // --- Fill ROOT tree ---
@@ -426,7 +426,7 @@ int main(int argc, char* argv[])
 	      B_LFJ_py     = jets_matrix[1][0].py();
 	      B_LFJ_pz     = jets_matrix[1][0].pz();
 	      B_evt_weight = EvtWeight;
-	      //B_rec        = sqrt( pow(cm_energy, 2) - (2 * cm_energy * jets_matrix[1][0].E()) + jets_matrix[1][0].m2() );
+	      B_rec        = sqrt( pow(3000, 2) - (2 * 3000 * jets_matrix[1][0].E()) + jets_matrix[1][0].m2() );
 	      
 	      B_N_FJ   = Njets[1];
 	      B_N_SJ   = Njets[0];
@@ -468,9 +468,9 @@ int main(int argc, char* argv[])
         */
               //============================top tagger==========================================
                         //Masa toplikes   masa toplikes más cortes; Recoil de ambas
-                        double delta_p=0.10, delta_r=0.19;
+                        double delta_p=0.1, delta_r=0.12, cos_theta_W_max = 0.7;
                         
-                        JHTopTagger top_tagger(delta_p, delta_r);
+                        JHTopTagger top_tagger(delta_p, delta_r,cos_theta_W_max);
                         top_tagger.set_top_selector(SelectorMassRange(150,200));
                         top_tagger.set_W_selector  (SelectorMassRange( 65, 95));
            
@@ -518,12 +518,13 @@ int main(int argc, char* argv[])
         int ngoodFJ = 0;
         fatjetHt->Fill(jets_matrix[1][0].perp()/Ptotal);
         fatjet2Ht->Fill(jets_matrix[1][1].perp()/Ptotal);
-        int cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0, cont5 = 0;
+        int  cont3 = 0, cont4 = 0, cont5 = 0;
         for(int i=0; i<Njets[1]; i++){
           tagged = top_tagger(jets_matrix[1][i]);
           m_fatjet->Fill(jets_matrix[1][i].m());
           m_FJvspt_FJ->Fill(jets_matrix[1][i].m(),jets_matrix[1][i].perp());
-          if((tagged != 0) && (tagged.structure_of<JHTopTagger>().non_W().perp() < 350)){                         
+          //if((tagged != 0) && (tagged.structure_of<JHTopTagger>().non_W().perp() < 350)){  
+          if(tagged != 0){                        
             m_toplikes->Fill(jets_matrix[1][i].m());
             m_recoiltoplikes->Fill(sqrt( pow(3000, 2) - (2 * 3000 * jets_matrix[1][i].E()) + jets_matrix[1][i].m2() ));
 
@@ -531,16 +532,16 @@ int main(int argc, char* argv[])
                 
 
 	        //if(jets_matrix[1][i].m() < mass_cut) continue;  //mass cut
-	        //if(cont1 ==0) cf[1]++;                // =============================================================== Cutflow 2 ================================================================================
+	        //if(cont1 ==0) cf[1]++;              
 	        //cont1++;                
 	        
 	        
 	        //if(jets_matrix[1][i].perp()<pt_cut) continue; //pt cut
-	        //if(cont2 ==0) cf[2]++;               // =============================================================== Cutflow 3 =================================================================================
+	        //if(cont2 ==0) cf[2]++;               
 	        //cont2++;
           
           if(tagged == 0) continue;
-	        if(cont3 ==0) cf[3]++;      // =============================================================== Cutflow 5 =========================================================================
+	        if(cont3 ==0) cf[2]++;      // =============================================================== Cutflow 3 =========================================================================
 	        cont3++;
           
           int nnearjets=0, nnearleptons=0;
@@ -588,7 +589,7 @@ int main(int argc, char* argv[])
           if(Ht > 0.4){ 
             if(nnearleptons != 0 || nnearjets != 0) continue;// top tagger cut
           }
-          if(cont4 == 0) cf[4]++;       // =============================================================== Cutflow 4 ==================================================================================
+          if(cont4 == 0) cf[3]++;       // =============================================================== Cutflow 4 ==================================================================================
           cont4++;
                                             
           
@@ -664,7 +665,7 @@ int main(int argc, char* argv[])
           
           
           if(jets_matrix[1][i].E()>Energy_cut)continue;
-          if(cont5 ==0) cf[5]++ ;// =============================================================== Cutflow 6 ========================================================================
+          if(cont5 == 0) cf[4]++ ;// =============================================================== Cutflow 5 ========================================================================
           cont5++;
           
           
