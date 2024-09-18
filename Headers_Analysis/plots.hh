@@ -79,7 +79,7 @@ TH2F* EFJvsmass = new TH2F("EFJvsmass","",3000,0,3000,3000,0,3000);
 TH2F* EFJvspt = new TH2F("EFJvspt","",3000,0,3000,3000,0,3000);
 TH2F* massvspt = new TH2F("massvspt","",3000,0,3000,3000,0,3000);
 
-TH1F* mrecoil_top_E_cut = new TH1F("mrecoil_top_E_cut","",3000,0,3000);
+TH1F* mrecoil_isolated_toplikes_rec_cut = new TH1F("mrecoil_isolated_toplikes_rec_cut","",3000,0,3000);
 
 TH2F* mrecoilvspt = new TH2F("mrecoilvspt","",3000,0,3000,3000,0,3000);
 
@@ -132,6 +132,10 @@ TH1F* cheat_bad_m_fatjet = new TH1F("bad_m_fatjet","",1000,0,1200);
 TH1F* cheat_bad_pt_fatjet = new TH1F("bad_pt_fatjet","",3000,0,3000);
 TH1F* cheat_bad_E_fatjet = new TH1F("bad_E_fatjet","",3000,0,3000);
 TH1F* cheat_bad_Ht_fatjet = new TH1F("bad_Ht_fatjet","",100,0,2);
+
+TH1F* XS = new TH1F("Cross_Section","",1000000,0,10);
+TH1F* no_sim = new TH1F("no_sim","",100000000,0,10000000);
+
 
 
 

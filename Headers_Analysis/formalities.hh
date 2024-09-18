@@ -83,16 +83,16 @@ void summary_analysis(int no_of_files, int total_events, double CrossSection, of
   *outfile << "::::::::::::::::::::::::::::::::::::::::::::::::::\n";
 }
 
-void cutflow(int size, string CF[], int cf[], double CrossSection, ofstream *outfile)
+void cutflow(int size, string CF[], int cf[], double CrossSection, double Luminosity, ofstream *outfile)
 {
   cout     << "\n   ---------------------"                       << endl;
   cout     << "  --- Cutflow summary ---"                        << endl;
   cout     << "   ---------------------\n"                       << endl;
-  cout     << "      ----------------------------"               << endl;
-  cout     << "\t    Cut       # of evts"                        << endl;
-  cout     << "      ----------------------------"               << endl;
+  cout     << "      ----------------------------------------"   << endl;
+  cout     << "\t    Cut       # of evts      weighted"          << endl;
+  cout     << "      ----------------------------------------"   << endl;
   for(unsigned i = 0; i < ( size ); i++)
-	  cout    << "\t" << i << " " << CF[i] << "\t" << cf[i]         << endl;
+	  cout    << "\t" << i << " " << CF[i] << "\t" << cf[i]<< "\t\t\t   " << (cf[i]*CrossSection*pow(10, -12)*Luminosity)/(pow(cf[0], 2))         << endl;
   cout     << "      ----------------------------"               << endl;
   cout     <<"Cross section [pb]: " << CrossSection              << endl;
 
@@ -103,10 +103,10 @@ void cutflow(int size, string CF[], int cf[], double CrossSection, ofstream *out
   *outfile     << "   ---------------------\n\n";
   *outfile     << "      ----------------------------\n";
   *outfile     << "\t    Cut       # of evts\n";
-  *outfile     << "      ----------------------------\n";
+  *outfile     << "      ----------------------------------------\n";
   for(unsigned i = 0; i < ( size ); i++)
-	  *outfile    << "\t" << i << " " << CF[i] << "\t" << cf[i] << "\n";
-  *outfile     << "      ----------------------------\n";
+	  *outfile    << "\t" << i << " " << CF[i] << "\t" << cf[i] << "\t\t\t   " << (cf[i]*CrossSection*pow(10, -12)*Luminosity)/(pow(cf[0], 2))<< "\n";
+  *outfile     << "      ----------------------------------------\n";
   *outfile     <<"Cross section [pb]: " << CrossSection;
 }
 

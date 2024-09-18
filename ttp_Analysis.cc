@@ -113,13 +113,14 @@ int main(int argc, char* argv[])
   int    total_events = 0;                        // === All events analysed in list_all_files ===
   int    icount       = 0;                        // === Event counter per HepMC file ===
   int    cf[5]        = {0, 0, 0, 0, 0};       // === Cutflow counter === 
+  double Luminosity   = 5*(pow(10, 18));
   
   // ***** cuts
   int    mass_cut     = 140 ;  
   int    pt_cut       = 400 ;
-  int    Energy_cut   = 1200 ;
+  int    m_recoil_cut   = 1100 ;
   
-  string CF[5] = {"All    ", "Fatjet ","top tagged", "Isolated", "Energy " + to_string(Energy_cut)};    // === Cutflow labels ===
+  string CF[5] = {"All    ", "Fatjet ","top tagged", "Isolated", "M recoil >  " + to_string(m_recoil_cut)};    // === Cutflow labels ===
 
 
   
@@ -664,12 +665,12 @@ int main(int argc, char* argv[])
           ngoodFJ++;
           
           
-          if(jets_matrix[1][i].E()>Energy_cut)continue;
+          if(T_rec<m_recoil_cut)continue;
           if(cont5 == 0) cf[4]++ ;// =============================================================== Cutflow 5 ========================================================================
           cont5++;
           
           
-          mrecoil_top_E_cut-> Fill(T_rec);
+          mrecoil_isolated_toplikes_rec_cut-> Fill(T_rec);
                 
                 
         } // fin de loop sobre FJ
@@ -718,7 +719,10 @@ int main(int argc, char* argv[])
       // ***** Cutflow summary *****
       
      
-      cutflow( sizeof(cf) / sizeof(int), CF,cf,CrossSection, &outfile);
+      cutflow( sizeof(cf) / sizeof(int), CF, cf, CrossSection, Luminosity, &outfile);
+      no_sim->Fill(icount);
+      XS->Fill(CrossSection/icount);
+      
 
       
       // ***** Read next file listed *****
