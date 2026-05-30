@@ -1,0 +1,25 @@
+scenario,step,cut,events,weighted
+no_overlay,0,All,1000,1263.95
+no_overlay,1,Fatjet,998,1261.42
+no_overlay,2,top tagged,297,375.393
+no_overlay,3,subestructure cut,255,322.307
+no_overlay,4,Isolated,163,206.024
+no_overlay,5,M recoil > 1100,155,195.912
+no_overlay,6,Miss Energy < 1000,147,185.801
+no_overlay,7,BDT ttbar,143,180.745
+no_overlay,8,BDT 1200,142,179.481
+no_overlay,9,BDT 1600,122,154.202
+no_overlay,10,BDT 2000,107,135.243
+no_overlay,11,BDT 2400,89,112.492
+overlay_1bx,0,All,1000,1263.95
+overlay_1bx,1,Fatjet,998,1261.42
+overlay_1bx,2,top tagged,299,377.921
+overlay_1bx,3,subestructure cut,258,326.099
+overlay_1bx,4,Isolated,164,207.288
+overlay_1bx,5,M recoil > 1100,156,197.176
+overlay_1bx,6,Miss Energy < 1000,148,187.065
+overlay_1bx,7,BDT ttbar,144,182.009
+overlay_1bx,8,BDT 1200,143,180.745
+overlay_1bx,9,BDT 1600,123,155.466
+overlay_1bx,10,BDT 2000,108,136.507
+overlay_1bx,11,BDT 2400,89,112.492

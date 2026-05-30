@@ -1,0 +1,2 @@
+sample,events,mean_sqrt_s_prime_GeV,std_sqrt_s_prime_GeV,q05_sqrt_s_prime_GeV,q50_sqrt_s_prime_GeV,q95_sqrt_s_prime_GeV,frac_sprime_below_0p99,frac_sprime_below_0p95,mean_x1,mean_x2,mean_abs_beta_z,mean_recoil_nominal_minus_event_GeV,q95_abs_recoil_shift_GeV
+Tt1200ISR_clic3000ll_nev1000_expansion_fresh,1000,2774.06,353.126,1969.78,2967.98,3000,0.506,0.337,0.931122,0.934897,0.0753399,nan,nan

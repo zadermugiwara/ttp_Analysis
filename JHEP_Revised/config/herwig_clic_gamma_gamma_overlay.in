@@ -1,0 +1,27 @@
+# -*- ThePEG-repository -*-
+#
+# Fast stress-test library for gamma gamma -> hadrons overlay studies.
+#
+# This is not a replacement for official CLIC beam-induced background files.
+# It provides a local HepMC event library that can be overlaid on hard events by
+# setting ASE_GG_OVERLAY_LIST in Analysis_Programs/ttp_Analysis.
+
+read snippets/EECollider.in
+
+# Equivalent-photon spectra from the incoming e+e- beams.
+set /Herwig/Particles/e+:PDF /Herwig/Partons/WWPDF
+set /Herwig/Particles/e-:PDF /Herwig/Partons/WWPDF
+set /Herwig/Shower/ShowerHandler:PDFA NULL
+set /Herwig/Shower/ShowerHandler:PDFB NULL
+
+cd /Herwig/MatrixElements
+insert SubProcess:MatrixElements 0 /Herwig/MatrixElements/MEgg2ff
+
+cd /Herwig/Generators
+set EventGenerator:EventHandler:LuminosityFunction:Energy 3000.0
+
+read snippets/HepMC.in
+set /Herwig/Analysis/HepMC:Filename JHEP_Revised/data/overlay/gamma_gamma_hadrons_3tev.hepmc
+set /Herwig/Analysis/HepMC:PrintEvent 1000000
+
+saverun CLICGammaGammaOverlay EventGenerator

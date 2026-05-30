@@ -1,0 +1,13 @@
+kappa_label,kappa_val,S,B,S/sqrt(S+B),dir
+kappa010,0.1000,49.4805,6939.28,0.591881,/home/higinio/Documentos/ASE/ttp_Analysis_kappa010
+kappa015,0.1500,112.014,6939.28,1.33394,/home/higinio/Documentos/ASE/ttp_Analysis_kappa015
+kappa020,0.2000,198.877,6939.28,2.35392,/home/higinio/Documentos/ASE/ttp_Analysis_kappa020
+kappa025,0.2500,309.976,6939.28,3.64067,/home/higinio/Documentos/ASE/ttp_Analysis_kappa025
+kappa030,0.3000,447.862,6939.28,5.21082,/home/higinio/Documentos/ASE/ttp_Analysis_kappa030
+kappa035,0.3500,610.168,6939.28,7.0225,/home/higinio/Documentos/ASE/ttp_Analysis_kappa035
+kappa040,0.4000,789.595,6939.28,8.98144,/home/higinio/Documentos/ASE/ttp_Analysis_kappa040
+kappa045,0.4500,956.372,6939.28,10.763,/home/higinio/Documentos/ASE/ttp_Analysis_kappa045
+kappa050,0.5000,1167.16,6939.28,12.9633,/home/higinio/Documentos/ASE/ttp_Analysis_kappa050
+kappa055,0.5500,1347.87,6939.28,14.8062,/home/higinio/Documentos/ASE/ttp_Analysis_kappa055
+kappa060,0.6000,1228.35,6939.28,13.5917,/home/higinio/Documentos/ASE/ttp_Analysis_kappa060
+kappa065,0.6500,683.703,6939.28,7.83078,/home/higinio/Documentos/ASE/ttp_Analysis_kappa065

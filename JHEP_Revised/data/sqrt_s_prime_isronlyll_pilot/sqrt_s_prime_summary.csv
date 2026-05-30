@@ -1,0 +1,2 @@
+sample,events,mean_sqrt_s_prime_GeV,std_sqrt_s_prime_GeV,q05_sqrt_s_prime_GeV,q50_sqrt_s_prime_GeV,q95_sqrt_s_prime_GeV,frac_sprime_below_0p99,frac_sprime_below_0p95,mean_x1,mean_x2,mean_abs_beta_z,mean_recoil_nominal_minus_event_GeV,q95_abs_recoil_shift_GeV
+Tt1200_ISR_isronlyll_pilot,1000,2781.14,347.641,1947.83,2965.78,3000,0.511,0.341,0.92895,0.941233,0.0734298,nan,nan

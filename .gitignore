@@ -1,0 +1,66 @@
+# Local editor settings
+.vscode/
+.idea/
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# C/C++ and ROOT build products
+*.o
+*.so
+*.d
+*.pcm
+*.a
+*_ACLiC_dict*
+*_C.so
+*_C.d
+
+# Large/generated physics data
+*.root
+*.lhe
+*.hepmc
+*.hepmc.gz
+*.lhe.gz
+*.yoda
+*.h5
+*.hdf5
+
+# Logs and transient outputs
+*.log
+runlog.txt
+out/
+root/
+madgraph_projects/
+
+# Installed third-party toolchains and archives
+HERWIG/
+Analysis/root/root/
+Analysis/root_v*.tar
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+
+# Generated analysis folders commonly kept local
+**/__pycache__/
+**/root/
+**/output/out_*.dat
+**/Resultados/*.root
+**/*~
+
+# JHEP production scratch and heavy event diagnostics
+JHEP_Revised/scratch/
+JHEP_Revised/logs/*/
+JHEP_Revised/data/**/*.hepmc
+JHEP_Revised/data/**/*.hepmc.gz
+JHEP_Revised/data/**/*events.csv
+JHEP_Revised/data/**/*events.csv.gz

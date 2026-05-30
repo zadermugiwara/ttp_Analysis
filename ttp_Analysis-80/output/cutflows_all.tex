@@ -1,0 +1,346 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\sisetup{detect-all}
+\begin{document}
+\section*{Cutflow Tables (one block per file)}
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 1359.550 \\
+1 & Fatjet & 999\,658 & 1359.080 \\
+2 & top tagged & 325\,637 & 442.720 \\
+3 & subestructure cut & 282\,927 & 384.653 \\
+4 & Isolated & 174\,308 & 236.980 \\
+5 & M recoil > 1100 & 166\,960 & 226.990 \\
+6 & Miss Energy < 1000 & 160\,866 & 218.705 \\
+7 & BDT ttbar & 153\,320 & 208.446 \\
+8 & BDT 1200 & 151\,665 & 206.196 \\
+9 & BDT 1600 & 121\,694 & 165.449 \\
+10 & BDT 2000 & 110\,029 & 149.590 \\
+11 & BDT 2400 & 89\,162 & 121.220 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_Tt1M1200.dat} (block 0). Total events analysed: 1000000. Total cross section: 271.91\,pb.}
+\label{tab:cutflow-out-Tt1M1200-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 1040.650 \\
+1 & Fatjet & 999\,712 & 1040.350 \\
+2 & top tagged & 319\,016 & 331.984 \\
+3 & subestructure cut & 271\,802 & 282.851 \\
+4 & Isolated & 195\,318 & 203.258 \\
+5 & M recoil > 1100 & 184\,087 & 191.570 \\
+6 & Miss Energy < 1000 & 177\,140 & 184.341 \\
+7 & BDT ttbar & 168\,178 & 175.014 \\
+8 & BDT 1200 & 166\,169 & 172.924 \\
+9 & BDT 1600 & 159\,808 & 166.304 \\
+10 & BDT 2000 & 142\,928 & 148.738 \\
+11 & BDT 2400 & 117\,009 & 121.765 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_Tt1M1600.dat} (block 0). Total events analysed: 1000000. Total cross section: 208.13\,pb.}
+\label{tab:cutflow-out-Tt1M1600-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 666.600 \\
+1 & Fatjet & 999\,643 & 666.362 \\
+2 & top tagged & 288\,640 & 192.407 \\
+3 & subestructure cut & 238\,746 & 159.148 \\
+4 & Isolated & 185\,204 & 123.457 \\
+5 & M recoil > 1100 & 169\,292 & 112.850 \\
+6 & Miss Energy < 1000 & 160\,858 & 107.228 \\
+7 & BDT ttbar & 149\,154 & 99.426 \\
+8 & BDT 1200 & 145\,018 & 96.669 \\
+9 & BDT 1600 & 143\,260 & 95.497 \\
+10 & BDT 2000 & 145\,149 & 96.756 \\
+11 & BDT 2400 & 121\,160 & 80.765 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_Tt1M2000.dat} (block 0). Total events analysed: 1000000. Total cross section: 133.32\,pb.}
+\label{tab:cutflow-out-Tt1M2000-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 294.150 \\
+1 & Fatjet & 999\,443 & 293.986 \\
+2 & top tagged & 216\,126 & 63.574 \\
+3 & subestructure cut & 174\,768 & 51.408 \\
+4 & Isolated & 123\,050 & 36.195 \\
+5 & M recoil > 1100 & 103\,127 & 30.335 \\
+6 & Miss Energy < 1000 & 93\,832 & 27.601 \\
+7 & BDT ttbar & 83\,205 & 24.475 \\
+8 & BDT 1200 & 80\,587 & 23.705 \\
+9 & BDT 1600 & 75\,480 & 22.202 \\
+10 & BDT 2000 & 75\,722 & 22.274 \\
+11 & BDT 2400 & 80\,538 & 23.690 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_Tt1M2400.dat} (block 0). Total events analysed: 1000000. Total cross section: 58.83\,pb.}
+\label{tab:cutflow-out-Tt1M2400-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+1 & Fatjet & 37\,105 & 924475.000 \\
+2 & top tagged & 0 & 0.000 \\
+3 & subestructure cut & 0 & 0.000 \\
+4 & Isolated & 0 & 0.000 \\
+5 & M recoil > 1100 & 0 & 0.000 \\
+6 & Miss Energy < 1000 & 0 & 0.000 \\
+7 & BDT ttbar & 0 & 0.000 \\
+8 & BDT 1200 & 0 & 0.000 \\
+9 & BDT 1600 & 0 & 0.000 \\
+10 & BDT 2000 & 0 & 0.000 \\
+11 & BDT 2400 & 0 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_hveve.dat} (block 0). Total events analysed: 100000. Total cross section: 49830.2\,pb.}
+\label{tab:cutflow-out-hveve-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 100\,000 & 6864.000 \\
+1 & Fatjet & 99\,198 & 6808.950 \\
+2 & top tagged & 0 & 0.000 \\
+3 & subestructure cut & 0 & 0.000 \\
+4 & Isolated & 0 & 0.000 \\
+5 & M recoil > 1100 & 0 & 0.000 \\
+6 & Miss Energy < 1000 & 0 & 0.000 \\
+7 & BDT ttbar & 0 & 0.000 \\
+8 & BDT 1200 & 0 & 0.000 \\
+9 & BDT 1600 & 0 & 0.000 \\
+10 & BDT 2000 & 0 & 0.000 \\
+11 & BDT 2400 & 0 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_hz.dat} (block 0). Total events analysed: 100000. Total cross section: 137.28\,pb.}
+\label{tab:cutflow-out-hz-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 124180.000 \\
+1 & Fatjet & 996\,241 & 123713.000 \\
+2 & top tagged & 433\,407 & 53820.500 \\
+3 & subestructure cut & 395\,484 & 49111.200 \\
+4 & Isolated & 333\,822 & 41454.000 \\
+5 & M recoil > 1100 & 62\,256 & 7730.950 \\
+6 & Miss Energy < 1000 & 59\,605 & 7401.750 \\
+7 & BDT ttbar & 44\,457 & 5520.670 \\
+8 & BDT 1200 & 43\,156 & 5359.110 \\
+9 & BDT 1600 & 30\,677 & 3809.470 \\
+10 & BDT 2000 & 26\,889 & 3339.080 \\
+11 & BDT 2400 & 24\,566 & 3050.610 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_ttbarra.dat} (block 0). Total events analysed: 2000000. Total cross section: 12418\,pb.}
+\label{tab:cutflow-out-ttbarra-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 2631.850 \\
+1 & Fatjet & 998\,933 & 2629.040 \\
+2 & top tagged & 321\,205 & 845.364 \\
+3 & subestructure cut & 279\,730 & 736.208 \\
+4 & Isolated & 193\,810 & 510.079 \\
+5 & M recoil > 1100 & 112\,979 & 297.344 \\
+6 & Miss Energy < 1000 & 109\,796 & 288.967 \\
+7 & BDT ttbar & 94\,129 & 247.734 \\
+8 & BDT 1200 & 90\,953 & 239.375 \\
+9 & BDT 1600 & 78\,938 & 207.753 \\
+10 & BDT 2000 & 76\,733 & 201.950 \\
+11 & BDT 2400 & 70\,113 & 184.527 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_tth.dat} (block 0). Total events analysed: 1000000. Total cross section: 526.37\,pb.}
+\label{tab:cutflow-out-tth-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 100\,000 & 26147.700 \\
+1 & Fatjet & 73\,138 & 19123.900 \\
+2 & top tagged & 4\,896 & 1280.190 \\
+3 & subestructure cut & 3\,607 & 943.147 \\
+4 & Isolated & 2\,179 & 569.758 \\
+5 & M recoil > 1100 & 2\,036 & 532.367 \\
+6 & Miss Energy < 1000 & 225 & 58.832 \\
+7 & BDT ttbar & 171 & 44.712 \\
+8 & BDT 1200 & 164 & 42.882 \\
+9 & BDT 1600 & 112 & 29.285 \\
+10 & BDT 2000 & 89 & 23.271 \\
+11 & BDT 2400 & 70 & 18.303 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_ttveve.dat} (block 0). Total events analysed: 100000. Total cross section: 522.953\,pb.}
+\label{tab:cutflow-out-ttveve-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 12103.400 \\
+1 & Fatjet & 982\,076 & 11886.500 \\
+2 & top tagged & 328\,430 & 3975.120 \\
+3 & subestructure cut & 279\,857 & 3387.220 \\
+4 & Isolated & 192\,247 & 2326.840 \\
+5 & M recoil > 1100 & 128\,793 & 1558.830 \\
+6 & Miss Energy < 1000 & 115\,221 & 1394.570 \\
+7 & BDT ttbar & 97\,336 & 1178.100 \\
+8 & BDT 1200 & 91\,935 & 1112.730 \\
+9 & BDT 1600 & 69\,848 & 845.398 \\
+10 & BDT 2000 & 64\,182 & 776.820 \\
+11 & BDT 2400 & 59\,770 & 723.420 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_ttz.dat} (block 0). Total events analysed: 1000000. Total cross section: 2420.68\,pb.}
+\label{tab:cutflow-out-ttz-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+1 & Fatjet & 40\,569 & 944955.000 \\
+2 & top tagged & 56 & 1304.380 \\
+3 & subestructure cut & 0 & 0.000 \\
+4 & Isolated & 0 & 0.000 \\
+5 & M recoil > 1100 & 0 & 0.000 \\
+6 & Miss Energy < 1000 & 0 & 0.000 \\
+7 & BDT ttbar & 0 & 0.000 \\
+8 & BDT 1200 & 0 & 0.000 \\
+9 & BDT 1600 & 0 & 0.000 \\
+10 & BDT 2000 & 0 & 0.000 \\
+11 & BDT 2400 & 0 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_w+w-.dat} (block 0). Total events analysed: 100000. Total cross section: 46585.1\,pb.}
+\label{tab:cutflow-out-w-w-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 100\,000 & 634081.000 \\
+1 & Fatjet & 58\,485 & 370842.000 \\
+2 & top tagged & 509 & 3227.470 \\
+3 & subestructure cut & 0 & 0.000 \\
+4 & Isolated & 0 & 0.000 \\
+5 & M recoil > 1100 & 0 & 0.000 \\
+6 & Miss Energy < 1000 & 0 & 0.000 \\
+7 & BDT ttbar & 0 & 0.000 \\
+8 & BDT 1200 & 0 & 0.000 \\
+9 & BDT 1600 & 0 & 0.000 \\
+10 & BDT 2000 & 0 & 0.000 \\
+11 & BDT 2400 & 0 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_w+w-veve.dat} (block 0). Total events analysed: 100000. Total cross section: 12681.6\,pb.}
+\label{tab:cutflow-out-w-w-veve-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 1\,000\,000 & 296892.000 \\
+1 & Fatjet & 813\,263 & 241451.000 \\
+2 & top tagged & 15\,157 & 4500.000 \\
+3 & subestructure cut & 1\,923 & 570.924 \\
+4 & Isolated & 1\,833 & 544.203 \\
+5 & M recoil > 1100 & 507 & 150.524 \\
+6 & Miss Energy < 1000 & 445 & 132.117 \\
+7 & BDT ttbar & 282 & 83.724 \\
+8 & BDT 1200 & 208 & 61.754 \\
+9 & BDT 1600 & 136 & 40.377 \\
+10 & BDT 2000 & 139 & 41.268 \\
+11 & BDT 2400 & 163 & 48.393 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_w+w-z.dat} (block 0). Total events analysed: 2000000. Total cross section: 29670.6\,pb.}
+\label{tab:cutflow-out-w-w-z-dat}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r l r r}
+\toprule
+Step & Cut & Events & Yield \\
+\midrule
+0 & All & 88\,228 & 130395.000 \\
+1 & Fatjet & 37\,405 & 55282.100 \\
+2 & top tagged & 0 & 0.000 \\
+3 & subestructure cut & 0 & 0.000 \\
+4 & Isolated & 0 & 0.000 \\
+5 & M recoil > 1100 & 0 & 0.000 \\
+6 & Miss Energy < 1000 & 0 & 0.000 \\
+7 & BDT ttbar & 0 & 0.000 \\
+8 & BDT 1200 & 0 & 0.000 \\
+9 & BDT 1600 & 0 & 0.000 \\
+10 & BDT 2000 & 0 & 0.000 \\
+11 & BDT 2400 & 0 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Cutflow for \texttt{out\_zz.dat} (block 0). Total events analysed: 88228. Total cross section: 2300.9\,pb.}
+\label{tab:cutflow-out-zz-dat}
+\end{table}
+
+\end{document}

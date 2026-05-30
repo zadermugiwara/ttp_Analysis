@@ -1,0 +1,2 @@
+command,status,returncode,start,end,log
+JHEP_Revised/config/madgraph_runs/Tt1200ISR_clic3000ll_nev1000_local.mg5,ok,0,2026-05-29T15:10:17,2026-05-29T15:15:18,JHEP_Revised/logs/mg5_queue_local_clic3000ll/Tt1200ISR_clic3000ll_nev1000_local.log

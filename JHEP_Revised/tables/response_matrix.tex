@@ -1,0 +1,22 @@
+\begin{table}[p]
+\centering
+\caption{Reviewer-response matrix implemented in the revised manuscript.}
+\label{tab:response-matrix}
+\small
+\begin{tabular}{r p{0.23\linewidth} p{0.24\linewidth} p{0.38\linewidth}}
+\toprule
+\# & Review issue & Where addressed & Action \\
+\midrule
+    1 & Meaning of fully simulated & Secs. \ref{sec:samples}, \ref{sec:realism} & Term removed; detector treatment stated as fast/parametric unless GEANT4/CLICdet is added. \\
+    2 & Top/b-tag efficiencies and mistags & Sec. \ref{sec:selection}, App. \ref{app:response} & Object definitions fixed; performance table is an explicit required validation item. \\
+    3 & Isolation-veto definition & Sec. \ref{sec:selection} & Cone, thresholds, nearby-activity veto, and relative-$H_T$ logic documented. \\
+    4 & Polarization choice & Sec. \ref{sec:realism} & Both $+80\%$ and $-80\%$ samples are shown; luminosity sharing is not assumed until a CLIC run plan is selected. \\
+    5 & Background completeness & Table \ref{tab:background-status} & Included, locally available, and missing background classes separated. \\
+    6 & Cutflow and normalization & Tables \ref{tab:reproducibility}, \ref{tab:benchmark-yields} & Yields trace back to ROOT histogram entries, cross sections, simulated events, and luminosity. \\
+    7 & Finite widths/interference & Sec. \ref{sec:kappa}, Table \ref{tab:width-validity-summary} & Main scan restricted to $\Gamma_T/m_T\le10\%$; one full-matrix-element stress test listed as required. \\
+    8 & Likelihood and systematics & Sec. \ref{sec:statistics}, Table \ref{tab:benchmark-yields} & Binned profile-likelihood workflow repaired; counting nuisance cross-checks included. \\
+    9 & Modern taggers/ML & Sec. \ref{sec:outlook} & Presented as next analysis step; no unvalidated ML gain claimed. \\
+    10 & Forced decay modes & App. \ref{app:response} & Validation matrix specified for $Wb$, $Zt$, and $Ht$ at 1.2 and 2.0 TeV. \\
+\bottomrule
+\end{tabular}
+\end{table}
