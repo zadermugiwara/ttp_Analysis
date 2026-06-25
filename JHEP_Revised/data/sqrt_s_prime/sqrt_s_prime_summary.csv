@@ -1,5 +1,0 @@
-sample,events,mean_sqrt_s_prime_GeV,std_sqrt_s_prime_GeV,q05_sqrt_s_prime_GeV,q50_sqrt_s_prime_GeV,q95_sqrt_s_prime_GeV,frac_sprime_below_0p99,frac_sprime_below_0p95,mean_x1,mean_x2,mean_abs_beta_z,mean_recoil_nominal_minus_event_GeV,q95_abs_recoil_shift_GeV
-Tt1200_baseline,1000000,3000,0,3000,3000,3000,0,0,1,1,0,0,0
-Tt1200_ISR_clic3000ll,1000000,2781.52,345.856,1954.97,2967.12,3000,0.507996,0.342058,0.934898,0.935087,0.0726134,236.728,1082.29
-Tt1200_plus80_ISR_clic3000ll,1000000,2782.65,344.866,1958.73,2967.54,3000,0.506761,0.340834,0.935332,0.935276,0.0721556,235.843,1080.04
-Tt1200_minus80_ISR_clic3000ll,1000000,2782.58,344.88,1957.98,2967.46,3000,0.506929,0.340988,0.935303,0.935259,0.0721727,235.869,1079.75

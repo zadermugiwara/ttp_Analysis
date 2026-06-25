@@ -1,5 +1,0 @@
-mass_GeV,hist,rebin_GeV,S_exp,B_exp,S_over_sqrt_SB,Z_Cowan_counting,Z_Cowan_binned,mu_hat,Z_profile_Asimov,Z_systematic_5pctB,outdir
-1200,mrecoil_BDT1200_cut,100,178.217999,10278.381214,1.742835,1.752836,1.909687,1.000005,1.909688,0.338315,JHEP_Revised/validation/profile_clic_unpol_rebin100/Tt1200
-1600,mrecoil_BDT1600_cut,100,129.474002,6404.304607,1.601771,1.612475,2.027184,1.0,2.027183,0.389733,JHEP_Revised/validation/profile_clic_unpol_rebin100/Tt1600
-2000,mrecoil_BDT2000_cut,100,64.585601,5052.493389,0.902869,0.906696,1.166591,1.0,1.16659,0.245099,JHEP_Revised/validation/profile_clic_unpol_rebin100/Tt2000
-2400,mrecoil_BDT2400_cut,100,13.5324,4325.699575,0.205432,0.205646,0.388106,1.000005,0.388106,0.059801,JHEP_Revised/validation/profile_clic_unpol_rebin100/Tt2400
