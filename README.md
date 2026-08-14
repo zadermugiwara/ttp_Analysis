@@ -31,6 +31,11 @@ generated plots, ROOT files, HEPMC/LHE events, or compiled binaries.
 - FastJet with `fastjet-contrib`, including `JHTopTagger` and `ValenciaPlugin`
 - A C++17 compiler and GNU Make
 
+The reconstruction code reads standard HepMC2 event records and is therefore
+independent of the event generator that produced them. Herwig may be used to
+generate the samples (and its environment can be sourced when convenient),
+but it is not a required dependency of the analysis itself.
+
 Large generated samples are not stored in Git. Set:
 
 ```bash
@@ -59,13 +64,9 @@ Then launch the interactive campaign manager:
 python3 manage_ase.py
 ```
 
-campaigns used in the paper. `manage_ase.py` updates the top-partner width from
-`generation/widths.csv` for every listed mass/coupling benchmark.
 Generate the baseline, ISR plus `-80%` electron polarization, and kappa
 benchmark campaigns used in the paper. `manage_ase.py` updates the top-partner
 width from `generation/widths.csv` for every listed mass/coupling benchmark.
-campaigns used in the paper. `manage_ase.py` updates the top-partner width from
-`generation/widths.csv` for every listed mass/coupling benchmark.
 
 ## Reconstruction
 
