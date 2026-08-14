@@ -145,54 +145,17 @@ TH1F* massetacut = new TH1F("massetacut","",5000,0,5000);
 
 TH1F* mrecoil_isolated_toplikes_subestructure_cut = new TH1F("mrecoil_isolated_toplikes_subestructure_cut","",5000,0,5000);
 
-TH1F* mrecoil_BDT1200_cut = new TH1F("mrecoil_BDT1200_cut","",5000,0,5000);
-TH1F* mrecoil_BDT1600_cut = new TH1F("mrecoil_BDT1600_cut","",5000,0,5000);
-TH1F* mrecoil_BDT2000_cut = new TH1F("mrecoil_BDT2000_cut","",5000,0,5000);
-TH1F* mrecoil_BDT2400_cut = new TH1F("mrecoil_BDT2400_cut","",5000,0,5000);
 
 
 
 
-TH1F* mrecoil_BDT_ttbar = new TH1F("mrecoil_BDT_ttbar","",5000,0,5000);
 
 
 
 
-TTree* BDT = new TTree("BDT", "epem_ttbar"); // Easy to deal with trees
-
-float ptjet1 = -999.0, ptjet2 = -999.0, ptjet3 = -999.0, ptjet4 = -999.0, pt_FJ_BDT = -999.00, Ht_BDT = -999.0, weight_BDT = -999.0;
-float   No_FJ_BDT = 0, No_jets_BDT = 0, No_leptons_BDT = 0;
-
-
-BDT -> Branch( "ptjet1",     &ptjet1,     "ptjet1/F"     );
-BDT -> Branch( "ptjet2",     &ptjet2,     "ptjet2/F"     );
-BDT -> Branch( "ptjet3",     &ptjet3,     "ptjet3/F"     );
-BDT -> Branch( "ptjet4",     &ptjet4,     "ptjet4/F"     );
-BDT -> Branch( "pt_FJ_BDT",  &pt_FJ_BDT,  "pt_FJ_BDT/F"  );
-BDT -> Branch( "Ht_BDT",     &Ht_BDT,     "Ht_BDT/F"     );
-BDT -> Branch( "weight_BDT", &weight_BDT, "weight_BDT/F" );
-
-
-BDT -> Branch( "No_FJ_BDT",      &No_FJ_BDT,   "No_FJ_BDT/F"      );
-BDT -> Branch( "No_jets_BDT",    &B_N_SJ,      "No_jets_BDT/F"    );
-BDT -> Branch( "No_leptons_BDT", &B_N_glep,    "No_leptons_BDT/F" );
-
-#include "tmva.hh"
 
 
 
-/*TH1F* ptjet1 = new TH1F("ptjet1","",5000,0,5000);
-TH1F* ptjet2 = new TH1F("ptjet2","",5000,0,5000);
-TH1F* ptjet3 = new TH1F("ptjet3","",5000,0,5000);
-TH1F* ptjet4 = new TH1F("ptjet4","",5000,0,5000);
-
-
-TH1F* No_FJ_BDT = new TH1F("No_FJ_BDT","",15,0,15);
-TH1F* No_jets_BDT = new TH1F("No_jets_BDT","",15,0,15);
-TH1F* No_leptons_BDT = new TH1F("No_leptons_BDT","",15,0,15);
-TH1F* Ht_BDT = new TH1F("Ht_BDT","",3500,0,3500);
-
-TH1F* pt_FJ_BDT = new TH1F("pt_FJ_BDT","",5000,0,5000);*/
 
 
 
@@ -421,10 +384,6 @@ massetacut->SetStats(0);
 
 mrecoil_isolated_toplikes_subestructure_cut->SetStats(0);
 
-mrecoil_BDT1200_cut->SetStats(0);
-mrecoil_BDT1600_cut->SetStats(0);
-mrecoil_BDT2000_cut->SetStats(0);
-mrecoil_BDT2400_cut->SetStats(0);
 
 fatjetleadHthem->GetYaxis()->SetTitle("Relative Ht");
 fatjet2Hthem->GetYaxis()->SetTitle("Relative Ht"); 
@@ -492,11 +451,3 @@ mrecoil_isolated_toplikes_rec_missE_cut->GetYaxis()->SetTitle("Recoil mass [GeV]
 massetacut->GetYaxis()->SetTitle("mass [GeV]");
 
 mrecoil_isolated_toplikes_subestructure_cut->GetYaxis()->SetTitle("Recoil mass [GeV]");
-
-mrecoil_BDT1200_cut->GetYaxis()->SetTitle("Recoil mass [GeV]");
-mrecoil_BDT1600_cut->GetYaxis()->SetTitle("Recoil mass [GeV]");
-mrecoil_BDT2000_cut->GetYaxis()->SetTitle("Recoil mass [GeV]");
-mrecoil_BDT2400_cut->GetYaxis()->SetTitle("Recoil mass [GeV]");
-
-
-	

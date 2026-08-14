@@ -12,7 +12,7 @@ CPPFLAGS += -I$(HEPMC_PREFIX)/include $(FASTJET_CFLAGS) $(ROOT_CFLAGS)
 CXXFLAGS ?= -O2
 CXXFLAGS += -std=c++17 -Wall -Wextra -Wno-deprecated
 LDFLAGS += -L$(HEPMC_PREFIX)/lib
-LDLIBS += -lHepMC $(FASTJET_LIBS) -lfastjettools -lValenciaPlugin $(ROOT_LIBS) -lTMVA
+LDLIBS += -lHepMC $(FASTJET_LIBS) -lfastjettools -lValenciaPlugin $(ROOT_LIBS)
 
 .PHONY: all clean
 

@@ -4,7 +4,6 @@ Rebuild the recoil comparison plot (Figure 2) with baseline vs ISR+polarised sce
 
 Inputs are the ROOT outputs of the three production configurations:
   - Unpolarised, no ISR:           ttp_Analysis/Tt1Moutput.root
-  - ISR with P(e-) = +80%:         ttp_Analysis+80ISR/Tt1Moutput.root
   - ISR with P(e-) = -80%:         ttp_Analysis-80ISR/Tt1Moutput.root
 
 The script extracts the recoil-mass stack for a given mass hypothesis, sums all
@@ -196,7 +195,7 @@ def parse_args() -> argparse.Namespace:
         "--scenarios",
         nargs="+",
         choices=["base", "plus80", "minus80"],
-        default=["base", "plus80"],
+        default=["base", "minus80"],
         help="Scenarios to include in the overlay.",
     )
     parser.add_argument(

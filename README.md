@@ -26,7 +26,7 @@ generated plots, ROOT files, HEPMC/LHE events, or compiled binaries.
 ## External Dependencies
 
 - MadGraph5_aMC@NLO 3.5.x with MadSpin and Pythia 8
-- ROOT with PyROOT, RooFit, RooStats, and TMVA
+- ROOT with PyROOT
 - HepMC 2
 - FastJet with `fastjet-contrib`, including `JHTopTagger` and `ValenciaPlugin`
 - A C++17 compiler and GNU Make
@@ -39,7 +39,9 @@ export ASE_HEPMC_ROOT=/path/to/Hepmcs
 export HEPMC_PREFIX=/path/to/hepmc2
 ```
 
-Source ROOT and any FastJet/HepMC environment before building.
+Ensure that `root-config` and `fastjet-config` are available on `PATH`, then
+source any FastJet/HepMC environment required by the local installation before
+building.
 
 ## Generation
 
@@ -57,7 +59,11 @@ Then launch the interactive campaign manager:
 python3 manage_ase.py
 ```
 
-Generate the baseline, ISR plus `+80%` polarization, and kappa benchmark
+campaigns used in the paper. `manage_ase.py` updates the top-partner width from
+`generation/widths.csv` for every listed mass/coupling benchmark.
+Generate the baseline, ISR plus `-80%` electron polarization, and kappa
+benchmark campaigns used in the paper. `manage_ase.py` updates the top-partner
+width from `generation/widths.csv` for every listed mass/coupling benchmark.
 campaigns used in the paper. `manage_ase.py` updates the top-partner width from
 `generation/widths.csv` for every listed mass/coupling benchmark.
 
@@ -81,10 +87,23 @@ Expected analysis directory names include:
 
 ```text
 ttp_Analysis
-ttp_Analysis+80ISR
+ttp_Analysis-80ISR
 ttp_Analysis_kappa010 ... ttp_Analysis_kappa065
-ttp_Analysis_kappa010+80ISR ... ttp_Analysis_kappa065+80ISR
+ttp_Analysis_kappa010-80ISR ... ttp_Analysis_kappa065-80ISR
 ```
+
+Custom study directories are also supported. For example, to process only the
+1.2 TeV signal in an exclusive `T -> t Z` study:
+
+```bash
+Analysis_Programs/smart_analysis.sh \
+  -c ttp_Analysis-80ISR_TZ100 \
+  --include '^Tt1M1200$'
+```
+
+The recoil-analysis workflow does not use BDT selections. The archived TMVA
+reader configuration is kept under `Analysis_Programs/legacy/bdt/` for reference
+only and is not part of the build.
 
 ## Paper Results
 
@@ -95,7 +114,7 @@ scripts/run_paper_results.sh
 ```
 
 This writes the signal recoil overlay, baseline recoil plot, four
-baseline-versus-ISR comparison plots, and the baseline and `+80%` ISR kappa
+baseline-versus-ISR comparison plots, and the baseline and `-80%` ISR kappa
 scans under `results/paper/`.
 
 Extract the generated widths independently with:

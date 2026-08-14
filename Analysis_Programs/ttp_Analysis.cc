@@ -19,7 +19,6 @@
 // ···································································································· //
 
 #include "Headers_Analysis/headers.hh"  // Contains all headers needed to run the analysis
-#include <exception>
 #include <TSystem.h>
 
 #ifndef ASE_OBJECT_ETA_MAX
@@ -241,7 +240,6 @@ int main(int argc, char* argv[])
   }
   
 #include "Headers_Analysis/plots.hh"    // ===== List of branches =====
-//#include "Headers_Analysis/tmva.hh"
 
   
   // ***** Events to be analysed *****
@@ -300,7 +298,7 @@ int main(int argc, char* argv[])
   double EvtWeight    = 0.0;                                         // === Keeps track of per-event weight ===
   int    total_events = 0;                                           // === All events analysed in list_all_files ===
   int    icount       = 0;                                           // === Event counter per HepMC file ===
-  int    cf[12]        = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};       // === Cutflow counter === 
+  int    cf[7]         = {0, 0, 0, 0, 0, 0, 0};                       // === Cutflow counter ===
   double Luminosity   = 5*(pow(10, 18));
   
   // ***** cuts
@@ -309,7 +307,7 @@ int main(int argc, char* argv[])
   int    m_recoil_cut       = 1100;
   int    missing_energy_cut = 1000;
   
-  string CF[12] = {"All    ", "Fatjet ","top tagged", "subestructure cut", "Isolated", "M recoil > " + to_string(m_recoil_cut), "Miss Energy < " + to_string(missing_energy_cut), "BDT ttbar", "BDT 1200", "BDT 1600", "BDT 2000", "BDT 2400"};    // === Cutflow labels ===
+  string CF[7] = {"All    ", "Fatjet ","top tagged", "subestructure cut", "Isolated", "M recoil > " + to_string(m_recoil_cut), "Miss Energy < " + to_string(missing_energy_cut)};    // === Cutflow labels ===
 
 
   
@@ -732,7 +730,7 @@ int main(int argc, char* argv[])
         int ngoodFJ = 0;
         fatjetHt->Fill(jets_matrix[1][0].perp()/Ptotal);
         fatjet2Ht->Fill(jets_matrix[1][1].perp()/Ptotal);
-        int  cont3 = 0, cont4 = 0, cont5 = 0, cont6 = 0, cont7 = 0, cont8 = 0, cont9 = 0, cont10 = 0, cont11 = 0, cont12 = 0;
+        int  cont3 = 0, cont4 = 0, cont5 = 0, cont6 = 0, cont7 = 0;
         for(int i=0; i<Njets[1]; i++){
           tagged = top_tagger(jets_matrix[1][i]);
           m_fatjet->Fill(jets_matrix[1][i].m());
@@ -918,82 +916,6 @@ int main(int argc, char* argv[])
 
           
 
-          int numjets = 0;
-          /*ptjet1 = 0;
-          ptjet2 = 0;
-          ptjet3 = 0;
-          ptjet4 = 0;*/
-          for(int j=0; j<Njets[0]; j++){
-            if(jets_matrix[0][j].perp()>25){    
-              float deltaR = DeltaR(jets_matrix[1][i],jets_matrix[0][j]);
-              if(deltaR > 1.7){
-                numjets++;
-                if(numjets == 1) ptjet1 = (jets_matrix[0][j].perp());
-                if(numjets == 2) ptjet2 = (jets_matrix[0][j].perp());
-                if(numjets == 3) ptjet3 = (jets_matrix[0][j].perp());
-                if(numjets == 4) ptjet4 = (jets_matrix[0][j].perp());
-              }
-            }
-          }
-          pt_FJ_BDT      = (jets_matrix[1][i].perp());
-          Ht_BDT         = (Ptotal);
-          No_FJ_BDT      = (Njets[1]);
-          No_jets_BDT    = (Njets[0]);
-          No_leptons_BDT = (leptons.size());
-
-
-          weight_BDT     = (EvtWeight);
-
-          BDT->Fill();
-
-          auto evaluate_bdt = [](TMVA::Reader* reader, const char* name) -> double {
-            if (!reader) return -9999.0;
-            try {
-              return reader->EvaluateMVA(name);
-            } catch (const std::exception& ex) {
-              std::cerr << "[WARN] TMVA evaluation failed for " << name << ": " << ex.what() << "\n";
-            } catch (...) {
-              std::cerr << "[WARN] TMVA evaluation failed for " << name << " (unknown error)\n";
-            }
-            return -9999.0;
-          };
-
-          double BDT1200_cut = evaluate_bdt(BDT_trained_1200.get(), "BDT");
-          if( BDT1200_cut > -0.12){
-            if(cont8 == 0) cf[8]++ ;
-            cont8++;
-            mrecoil_BDT1200_cut-> Fill(T_rec);
-          }
-
-          double BDT_ttbar_cut = evaluate_bdt(BDT_ttbar.get(), "BDT");
-          if(BDT_ttbar_cut > -0.12){
-            if(cont9 == 0) cf[7]++ ;
-            cont9++;
-            mrecoil_BDT_ttbar-> Fill(T_rec);
-          }
-
-          double BDT1600_cut = evaluate_bdt(BDT_trained_1600.get(), "BDT");
-          if( BDT1600_cut > -0.08){
-            if(cont10 == 0) cf[9]++ ;
-            cont10++;
-            mrecoil_BDT1600_cut-> Fill(T_rec);
-          }
-
-          double BDT2000_cut = evaluate_bdt(BDT_trained_2000.get(), "BDT");
-          if( BDT2000_cut > -0.08){
-            if(cont11 == 0) cf[10]++ ;
-            cont11++;
-            mrecoil_BDT2000_cut-> Fill(T_rec);
-          }
-
-          double BDT2400_cut = evaluate_bdt(BDT_trained_2400.get(), "BDT");
-          if( BDT2400_cut > -0.07){
-            if(cont12 == 0) cf[11]++ ;
-            cont12++;
-            mrecoil_BDT2400_cut-> Fill(T_rec);
-          }
-                
-                
         } // fin de loop sobre FJ
         goodFJ->Fill(ngoodFJ);
         No_FJ->Fill(cont3); 

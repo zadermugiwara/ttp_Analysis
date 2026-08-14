@@ -97,5 +97,3 @@ ostream & operator<<(ostream &, const PseudoJet &);
 #include "hadrons_classes.hh"                                // ===== Classes defining B- and C-hadrons =====
 #include "isolated_leptons.hh"                               // ===== Lepton isolation =====
 #include "particles_classes.hh"                              // ===== Classes defining particles =====
-#include "TMVA/Reader.h"
-

@@ -350,12 +350,9 @@ BACKGROUND_SOURCES = [
 BASE_BACKGROUND = ('ttbarra', 't#bar{t}')
 
 bkgcompare = ['mrecoil_isolated_toplikes_rec_cut', 'Miss_Energy','No_FJ', 'No_top_FJ','Ht',
-              'fatjetpostHt', 'mrecoil_isolated_toplikes_rec_missE_cut',
-              'mrecoil_BDT1200_cut', 'mrecoil_BDT_ttbar', 'mrecoil_BDT2400_cut']
+              'fatjetpostHt', 'mrecoil_isolated_toplikes_rec_missE_cut']
 
-bkgstack = ['mrecoil_isolated_toplikes_rec_cut', 'mrecoil_isolated_toplikes_rec_missE_cut',
-            'mrecoil_BDT1200_cut', 'mrecoil_BDT_ttbar', 'mrecoil_BDT1600_cut',
-            'mrecoil_BDT2000_cut','mrecoil_BDT2400_cut']
+bkgstack = ['mrecoil_isolated_toplikes_rec_cut', 'mrecoil_isolated_toplikes_rec_missE_cut']
 
 # Colores de fondo (estables por nombre y persistentes al reabrir .root).
 # Evitamos TColor custom en bkg porque los índices RGB no son portables entre sesiones.
